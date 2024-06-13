@@ -24,6 +24,13 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
+                                <label for="prof_dni">ID</label>
+                                <input type="text" class="form-control" name="prof_dni" id="prof_dni" placeholder="Ingrese un ID">
+                                <div id="respuesta"></div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
                                 <label for="prof_nom">Nombre</label>
                                 <input type="text" class="form-control" name="prof_nom" id="prof_nom" placeholder="Ingrese un Nombre">
                             </div>
@@ -140,12 +147,6 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="prof_cv">Hoja de vida</label>
-                                <input type="file" class="prof_cv" name="prof_cv" id="prof_cv">
-                            </div>
-                        </div>
                     </div>    
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -156,3 +157,4 @@
         </div>
     </div>
 </div>
+

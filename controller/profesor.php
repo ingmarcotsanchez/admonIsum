@@ -41,8 +41,13 @@
                     //if(isset($_FILES['prof_cv']) && $_FILES['prof_cv']['type']=='application/pdf'){
                     //   $cv=move_uploaded_file ($_FILES['prof_cv']['tmp_name'] , $ruta.$_FILES['documento']['name']);
                     //}
-                   
-                    $profesor->insert_profesor($ruta,$_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],date('Y-m-d',strtotime($_POST["prof_fecini"])),date('Y-m-d',strtotime($_POST["prof_fecfin"])),$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"]);//,$cv);
+                    //$verificar->verificarProfesor($_POST["prof_dni"]);
+                    //var_dump($verificar);
+                    //if(empty($verificar > 0)){
+                        $profesor->insert_profesor($ruta,$_POST["prof_dni"],$_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],date('Y-m-d',strtotime($_POST["prof_fecini"])),date('Y-m-d',strtotime($_POST["prof_fecfin"])),$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"]);//,$cv);
+                    //}else{
+                    //    $respuesta = array('msg'=>'Error el profesor ya existe','icono'=>'warning');
+                    //}
                     
                 }else{
                     //if(empty($_POST["prof_fecfin"])) {
@@ -83,7 +88,7 @@
                        
                     }
                    
-                    $profesor->update_profesor($_POST["prof_id"], $ruta, $_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],date('Y-m-d',strtotime($_POST["prof_fecini"])),date('Y-m-d',strtotime($_POST["prof_fecfin"])),$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"]);
+                    $profesor->update_profesor($_POST["prof_id"], $ruta, $_POST["prof_dni"], $_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],date('Y-m-d',strtotime($_POST["prof_fecini"])),date('Y-m-d',strtotime($_POST["prof_fecfin"])),$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"]);
                    // }
                 }
                 break;
@@ -93,6 +98,7 @@
                     foreach($datos as $row){
                         $output["prof_id"] = $row["prof_id"];
                         $output["prof_image"] = $row["prof_image"];
+                        $output["prof_dni"] = $row["prof_dni"];
                         $output["prof_nom"] = $row["prof_nom"];
                         $output["prof_apep"] = $row["prof_apep"];
                         $output["prof_apem"] = $row["prof_apem"];
@@ -127,7 +133,7 @@
                 foreach($datos as $row){
                     $sub_array = array();
                     //columnas de las tablas a mostrar segun select del modelo
-                    //$sub_array[] = $row["prof_image"];
+                    $sub_array[] = $row["prof_dni"];
                     $sub_array[] = $row["prof_nom"] ." ". $row["prof_apep"] ." ". $row["prof_apem"];
                     //$sub_array[] = $row["prof_correo"];
                     if($row["prof_niv"] == 'P'){
@@ -183,7 +189,7 @@
             }
             break;
         case "guardar_desde_excel":
-            $profesor->insert_profesor($_POST["prof_image"],$_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],$_POST["prof_fecini"],$_POST["prof_fecfin"],$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"],$_POST["prof_cv"]);
+            $profesor->insert_profesor($_POST["prof_image"],$_POST["prof_dni"],$_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],$_POST["prof_fecini"],$_POST["prof_fecfin"],$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"],$_POST["prof_cv"]);
             break;
         
         case "activo":

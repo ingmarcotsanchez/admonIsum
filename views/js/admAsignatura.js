@@ -41,6 +41,52 @@ $(document).ready(function(){
 
     combo_semestres();
 
+
+    $('input#asig_alfa').keypress(function (event) {
+        if (event.which < 48 || event.which > 57 || this.value.length === 10) {
+          return false;
+        }
+    });
+
+    $("#asig_alfa").on("keyup", function() {
+        var asig_alfa = $("#asig_alfa").val(); //CAPTURANDO EL VALOR DE INPUT CON ID CEDULA
+        var longitudCedula = $("#asig_alfa").val().length; //CUENTO LONGITUD
+      
+      //Valido la longitud 
+        if(longitudCedula >= 8){
+            var dataString = 'asig_alfa=' + asig_alfa;
+      
+            $.ajax({
+                url: '/ISUM/views/js/verificarAlfanumerico.php',
+                type: "GET",
+                data: dataString,
+                dataType: "JSON",
+      
+                success: function(datos){
+      
+                    if( datos.success == 1){
+      
+                        $("#respuesta").html(datos.message);
+      
+                        $("input").attr('disabled',true);
+                        $("select").attr('disabled',true);
+                        $("input#asig_alfa").attr('disabled',false);
+                        $("button").attr('disabled',true);
+      
+                    }else{
+      
+                        $("#respuesta").html(datos.message);
+      
+                        $("input").attr('disabled',false);
+                        $("select").attr('disabled',false);
+                        $("button").attr('disabled',false);
+      
+                    }
+                }
+            });
+        }
+    });
+
     $('#asignatura_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,

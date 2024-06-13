@@ -22,6 +22,7 @@
                             <div class="form-group">
                                 <label for="asig_alfa">Alfanumerico</label>
                                 <input type="text" class="form-control" name="asig_alfa" id="asig_alfa" placeholder="Ingrese el Alfanumerico">
+                                <div id="respuesta"></div>
                             </div>
                         </div>
                         

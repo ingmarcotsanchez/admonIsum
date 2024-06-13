@@ -19,6 +19,7 @@
                             <div class="form-group">
                                 <label for="est_dni">ID</label>
                                 <input type="text" class="form-control" name="est_dni" id="est_dni" placeholder="Ingrese su ID">
+                                <div id="respuesta"></div>
                             </div>
                         </div>
                         <div class="col-6">

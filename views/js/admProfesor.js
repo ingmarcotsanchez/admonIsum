@@ -91,6 +91,52 @@ $(document).ready(function(){
     combo_rol();
     combo_escalfon();
 
+    $('input#prof_dni').keypress(function (event) {
+        if (event.which < 48 || event.which > 57 || this.value.length === 10) {
+          return false;
+        }
+    });
+
+    $("#prof_dni").on("keyup", function() {
+        var prof_dni = $("#prof_dni").val(); //CAPTURANDO EL VALOR DE INPUT CON ID CEDULA
+        var longitudCedula = $("#prof_dni").val().length; //CUENTO LONGITUD
+      
+      //Valido la longitud 
+        if(longitudCedula >= 8){
+            var dataString = 'prof_dni=' + prof_dni;
+      
+            $.ajax({
+                url: '/ISUM/views/js/verificarCedula.php',
+                type: "GET",
+                data: dataString,
+                dataType: "JSON",
+      
+                success: function(datos){
+      
+                    if( datos.success == 1){
+      
+                        $("#respuesta").html(datos.message);
+      
+                        $("input").attr('disabled',true);
+                        $("select").attr('disabled',true);
+                        $("input#prof_dni").attr('disabled',false);
+                        $("button").attr('disabled',true);
+      
+                    }else{
+      
+                        $("#respuesta").html(datos.message);
+      
+                        $("input").attr('disabled',false);
+                        $("select").attr('disabled',false);
+                        $("button").attr('disabled',false);
+      
+                    }
+                }
+            });
+        }
+    });
+              
+
     $('#profesor_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,
@@ -147,6 +193,7 @@ function editar(prof_id){
         data = JSON.parse(data);
         //console.log(data);
         $('#prof_id').val(data.prof_id);
+        $('#prof_dni').val(data.prof_dni);
         $('#prof_nom').val(data.prof_nom);
         $('#prof_apep').val(data.prof_apep);
         $('#prof_apem').val(data.prof_apem);
@@ -244,22 +291,23 @@ var ExcelToJSON = function() {
                     var columns = Object.values(ProfesorList[i])
 
                     $.post("/ISUM/controller/profesor.php?opc=guardar_desde_excel",{
-                        prof_nom : columns[0],
-                        prof_apep : columns[1],
-                        prof_apem : columns[2],
-                        prof_correo : columns[3],
-                        prof_correo2 : columns[4],
-                        prof_nivel : columns[5],
-                        prof_sex : columns[6],
-                        prof_telf :columns[7],
-                        rol_id :columns[8],
-                        esc_id :columns[9],
-                        prof_fecini : columns[10],
-                        prof_fecfin : columns[11],
-                        prof_cvlac : columns[12],
-                        prof_orcid : columns[13],
-                        prof_google : columns[14],
-                        prof_est : columns[15]
+                        prof_dni : columns[0],
+                        prof_nom : columns[1],
+                        prof_apep : columns[2],
+                        prof_apem : columns[3],
+                        prof_correo : columns[4],
+                        prof_correo2 : columns[5],
+                        prof_nivel : columns[6],
+                        prof_sex : columns[7],
+                        prof_telf :columns[8],
+                        rol_id :columns[9],
+                        esc_id :columns[10],
+                        prof_fecini : columns[11],
+                        prof_fecfin : columns[12],
+                        prof_cvlac : columns[13],
+                        prof_orcid : columns[14],
+                        prof_google : columns[15],
+                        prof_est : columns[16]
                     }, function (data) {
                         console.log(data);
                     });

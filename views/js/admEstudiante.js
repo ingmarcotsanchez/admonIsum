@@ -36,6 +36,52 @@ function guardaryeditar(e){
 
 $(document).ready(function(){
 
+    $('input#est_dni').keypress(function (event) {
+        if (event.which < 48 || event.which > 57 || this.value.length === 10) {
+          return false;
+        }
+    });
+
+    $("#est_dni").on("keyup", function() {
+        var est_dni = $("#est_dni").val(); //CAPTURANDO EL VALOR DE INPUT CON ID CEDULA
+        var longitudCedula = $("#est_dni").val().length; //CUENTO LONGITUD
+      
+      //Valido la longitud 
+        if(longitudCedula >= 8){
+            var dataString = 'est_dni=' + est_dni;
+      
+            $.ajax({
+                url: '/ISUM/views/js/verificarEstudiante.php',
+                type: "GET",
+                data: dataString,
+                dataType: "JSON",
+      
+                success: function(datos){
+      
+                    if( datos.success == 1){
+      
+                        $("#respuesta").html(datos.message);
+      
+                        $("input").attr('disabled',true);
+                        $("select").attr('disabled',true);
+                        $("input#est_dni").attr('disabled',false);
+                        $("button").attr('disabled',true);
+      
+                    }else{
+      
+                        $("#respuesta").html(datos.message);
+      
+                        $("input").attr('disabled',false);
+                        $("select").attr('disabled',false);
+                        $("button").attr('disabled',false);
+      
+                    }
+                }
+            });
+        }
+    });
+
+
     $('#estudiante_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,

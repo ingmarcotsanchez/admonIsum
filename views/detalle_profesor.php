@@ -87,6 +87,8 @@ if(isset($_SESSION["usu_id"])){
                                             <h3 class="card-title">Información General</h3>
                                         </div>
                                         <div class="card-body">
+                                            <strong>ID</strong>
+                                            <p class="text-muted"><?php echo $prof[$i]["prof_dni"];?></p>
                                             <strong>CORREO ADMINISTRATIVO</strong>
                                             <p class="text-muted"><?php echo $prof[$i]["prof_correo"];?></p>
                                             <strong>CORREO ACADÉMICO</strong>

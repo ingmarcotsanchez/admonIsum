@@ -46,7 +46,7 @@ if(isset($_SESSION["usu_id"])){
                             <table id="profesor_data" class="table display responsive wrap">
                                 <thead>
                                     <tr>
-                              
+                                        <th>ID</th>
                                         <th>Profesor</th>
                                         
                                         <th>Nivel Estudio</th>
