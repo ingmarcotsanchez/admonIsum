@@ -85,6 +85,15 @@
                             imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
                             imagepng($destino, $r.$ruta);
                         }
+                        if($_FILES["prof_image"]["type"] == "image/jpg"){
+                            $aleatorio = mt_rand(100,999);
+                            //$ruta = __DIR__."/../views/images/profesor/".$_POST["prof_apep"]."/".$aleatorio.".png";
+                            $ruta = "/images/profesor/".$_POST["prof_apep"].$_POST["prof_apem"]."/".$aleatorio.".jpg";
+                            $origen = imagecreatefrompng($_FILES["prof_image"]["tmp_name"]);
+                            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                            imagepng($destino, $r.$ruta);
+                        }
                        
                     }
                    
@@ -161,7 +170,7 @@
                     }
                     $sub_array[] = $row["esc_nombre"];
                     if($row["prof_est"] == '1'){
-                        $sub_array[] = "<button type='button' onClick='prof_ina(".$row["prof_id"].");' class='btn btn-success btn-sm'>Activo</button>";
+                        $sub_array[] = "<button type='button' onClick='prof_ina(".$row["prof_id"].");' class='btn btn-primary btn-sm'>Activo</button>";
                     }else{
                         $sub_array[] = "<button type='button' onClick='prof_act(".$row["prof_id"].");' class='btn btn-danger btn-sm'>Inactivo</button>";
                     }
