@@ -6,9 +6,42 @@
     switch($_GET["opc"]){
         case "guardaryeditar":
                 if(empty($_POST["aut_id"])){
-                    $autoevaluacion->insert_autoevaluacion($_POST["fac_id"],$_POST["aut_ponderacion"],$_POST["aut_califica"],$_POST["aut_cumple"],$_POST["aut_anno"]);
+                    $aut_califica = (int)$_POST["aut_califica"];
+                    if($aut_califica <= 20){
+                        $aut_cumple="N";
+                        $autoevaluacion->insert_autoevaluacion($_POST["fac_id"],$_POST["aut_ponderacion"],$_POST["aut_califica"],$aut_cumple,$_POST["aut_anno"]);
+                    }elseif($aut_califica >= 21 AND $aut_califica <= 40){
+                        $aut_cumple="I";
+                        $autoevaluacion->insert_autoevaluacion($_POST["fac_id"],$_POST["aut_ponderacion"],$_POST["aut_califica"],$aut_cumple,$_POST["aut_anno"]);
+                    }elseif($aut_califica >= 41 AND $aut_califica <= 60){
+                        $aut_cumple="A";
+                        $autoevaluacion->insert_autoevaluacion($_POST["fac_id"],$_POST["aut_ponderacion"],$_POST["aut_califica"],$aut_cumple,$_POST["aut_anno"]);
+                    }elseif($aut_califica >= 61 AND $aut_califica <= 89){
+                        $aut_cumple="G";
+                        $autoevaluacion->insert_autoevaluacion($_POST["fac_id"],$_POST["aut_ponderacion"],$_POST["aut_califica"],$aut_cumple,$_POST["aut_anno"]);
+                    }elseif($aut_califica >= 90){
+                        $aut_cumple="P";
+                        $autoevaluacion->insert_autoevaluacion($_POST["fac_id"],$_POST["aut_ponderacion"],$_POST["aut_califica"],$aut_cumple,$_POST["aut_anno"]);
+                    }
+                    
                 }else{
-                    $autoevaluacion->update_autoevaluacion($_POST["aut_id"], $_POST["fac_id"],$_POST["aut_ponderacion"],$_POST["aut_califica"],$_POST["aut_cumple"],$_POST["aut_anno"]);
+                    if($aut_califica <= 20){
+                        $aut_cumple="N";
+                        $autoevaluacion->update_autoevaluacion($_POST["aut_id"], $_POST["fac_id"],$_POST["aut_ponderacion"],$_POST["aut_califica"],$aut_cumple,$_POST["aut_anno"]);
+                    }elseif($aut_califica >= 21 AND $aut_califica <= 40){
+                        $aut_cumple="I";
+                        $autoevaluacion->update_autoevaluacion($_POST["aut_id"], $_POST["fac_id"],$_POST["aut_ponderacion"],$_POST["aut_califica"],$aut_cumple,$_POST["aut_anno"]);
+                    }elseif($aut_califica >= 41 AND $aut_califica <= 60){
+                        $aut_cumple="A";
+                        $autoevaluacion->update_autoevaluacion($_POST["aut_id"], $_POST["fac_id"],$_POST["aut_ponderacion"],$_POST["aut_califica"],$aut_cumple,$_POST["aut_anno"]);
+                    }elseif($aut_califica >= 61 AND $aut_califica <= 89){
+                        $aut_cumple="G";
+                        $autoevaluacion->update_autoevaluacion($_POST["aut_id"], $_POST["fac_id"],$_POST["aut_ponderacion"],$_POST["aut_califica"],$aut_cumple,$_POST["aut_anno"]);
+                    }elseif($aut_califica >= 90){
+                        $aut_cumple="P";
+                        $autoevaluacion->update_autoevaluacion($_POST["aut_id"], $_POST["fac_id"],$_POST["aut_ponderacion"],$_POST["aut_califica"],$aut_cumple,$_POST["aut_anno"]);
+                    }
+                    
                 }
                 break;
         case "mostrar":

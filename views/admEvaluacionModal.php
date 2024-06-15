@@ -33,18 +33,7 @@
                             </div>
                         </div>
                 
-                       <!-- <div class="col-4">
-                            <div class="form-group">
-                                <label for="eva_est">Estado</label>
-                                <input type="text" class="form-control" name="eva_est" id="eva_est" readonly>
-                                <select class="form-control select2" name="eva_est" id="eva_est" data-placeholder="Seleccione">
-                                    <option label="Seleccione"></option>
-                                    <option value=1>Alto</option>
-                                    <option value=0>Bajo</option>
-                                </select>
-                            </div>
-                        </div>
-                        -->
+                       
                     </div> 
                       
                 </div>

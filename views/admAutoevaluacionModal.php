@@ -22,18 +22,19 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group">
                                 <label for="aut_ponderacion">Ponderación</label>
-                                <input type="number" class="form-control" name="aut_ponderacion" id="aut_ponderacion" placeholder="Ingrese la ponderación">
+                                <input type="number" class="form-control" name="aut_ponderacion" id="aut_ponderacion" min="1" max="10" placeholder="Ingrese la ponderación">
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group">
                                 <label for="aut_califica">Calificación</label>
                                 <input type="number" min="0" max="100" class="form-control" name="aut_califica" id="aut_califica" placeholder="Ingrese la calificación obtenida">
                             </div>
                         </div>
+                        <!--
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="aut_cumple">Cumplimiento</label>
@@ -47,7 +48,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-6">
+-->
+                        <div class="col-4">
                             <div class="form-group">
                                 <label for="aut_anno">Año</label>
                                 <input type="number" min="2017" class="form-control" name="aut_anno" id="aut_anno" placeholder="Ingrese el año">
