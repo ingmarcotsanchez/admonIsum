@@ -106,6 +106,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?php echo BASE_URL; ?>admSublinea.php" class="nav-link">
+                  <i class="fas fa-file text-warning nav-icon"></i>
+                  <p>Sub Líneas</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?php echo BASE_URL; ?>admSemilleros.php" class="nav-link">
                   <i class="fas fa-plus-square text-warning nav-icon"></i>
                   <p>Semilleros</p>
