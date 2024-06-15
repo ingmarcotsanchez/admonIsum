@@ -48,7 +48,6 @@ if(isset($_SESSION["usu_id"])){
                                         <th>Semillero</th>
                                         <th>Año</th>
                                         <th>Líder</th>
-                                        <th>Sub Línea</th>
                                         <th></th>
                                         <th></th>
                                         <th></th>

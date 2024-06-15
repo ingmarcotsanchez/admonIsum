@@ -58,12 +58,11 @@
                         </div> 
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="sem_sublinea">Sub Línea</label>
-                                <select class="form-control select2" name="sem_sublinea" id="sem_sublinea" data-placeholder="Seleccione">
+                                <label for="sublinea_id">Línea de Investigación</label>
+                                <select class="form-control select2" style="width:100%" name="sublinea_id" id="sublinea_id" data-placeholder="Seleccione">
+                                
                                     <option label="Seleccione"></option>
-                                    <option value="A">Arquitectura de Datos</option>
-                                    <option value="I">Ingeniería de Software</option>
-                                    <option value="O">Organizaciones y Tics</option>
+
                                 </select>
                             </div>
                         </div>

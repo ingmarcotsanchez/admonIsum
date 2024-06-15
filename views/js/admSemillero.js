@@ -39,7 +39,23 @@ $(document).ready(function(){
         dropdownParent: $("#modalcrearSemillero")
     });
 
+    $('#grup_id').select2({
+        dropdownParent: $("#modalcrearSemillero")
+    });
+
+    $('#linea_id').select2({
+        dropdownParent: $("#modalcrearSemillero")
+    });
+
+    $('#sublinea_id').select2({
+        dropdownParent: $("#modalcrearSemillero")
+    });
+
     select_profesor();
+    select_grupo();
+    select_linea();
+    select_sublinea();
+
 
     $('#semillero_data').DataTable({
         "aProcessing": true,
@@ -101,7 +117,12 @@ function editar(sem_id){
         $('#sem_nom').val(data.sem_nom);
         $('#sem_anno').val(data.sem_anno);
         $('#prof_id').val(data.prof_id).trigger('change');
-        $('#sem_sublinea').val(data.sem_sublinea);
+        $('#grup_id').val(data.grup_id).trigger('change');
+        $('#linea_id').val(data.linea_id).trigger('change');
+        $('#sublinea_id').val(data.sublinea_id).trigger('change');
+        $('#sem_mision').val(data.sem_mision);
+        $('#sem_vision').val(data.sem_vision);
+        $('#sem_objetivo').val(data.sem_objetivo);
     });
     $('#titulo_modal').html('Editar Semillero');
     $('#modalcrearSemillero').modal('show');
@@ -134,6 +155,24 @@ function eliminar(sem_id){
 function select_profesor(){
     $.post("/ISUM/controller/profesor.php?opc=combo",function (data){
         $('#prof_id').html(data);
+    });
+}
+
+function select_grupo(){
+    $.post("/ISUM/controller/grupo.php?opc=combo",function (data){
+        $('#grup_id').html(data);
+    });
+}
+
+function select_linea(){
+    $.post("/ISUM/controller/linea.php?opc=combo",function (data){
+        $('#linea_id').html(data);
+    });
+}
+
+function select_sublinea(){
+    $.post("/ISUM/controller/sublinea.php?opc=combo",function (data){
+        $('#sublinea_id').html(data);
     });
 }
 
