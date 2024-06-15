@@ -7,9 +7,9 @@
         
         case "guardaryeditar":
             if(empty($_POST["sem_id"])){
-                $semillero->insert_semillero($_POST["sem_nom"],$_POST["sem_anno"],$_POST["prof_id"],$_POST["sem_linea"]);
+                $semillero->insert_semillero($_POST["sem_nom"],$_POST["sem_anno"],$_POST["prof_id"],$_POST["sem_sublinea"]);
             }else{
-                $semillero->update_semillero($_POST["sem_id"],$_POST["sem_nom"],$_POST["sem_anno"],$_POST["prof_id"],$_POST["sem_linea"]);
+                $semillero->update_semillero($_POST["sem_id"],$_POST["sem_nom"],$_POST["sem_anno"],$_POST["prof_id"],$_POST["sem_sublinea"]);
             }
             break;
         case "mostrar":
@@ -20,7 +20,7 @@
                     $output["sem_nom"] = $row["sem_nom"];
                     $output["sem_anno"] = $row["sem_anno"];
                     $output["prof_id"] = $row["prof_id"];
-                    $output["sem_linea"] = $row["sem_linea"];
+                    $output["sem_sublinea"] = $row["sem_sublinea"];
                 }
                 echo json_encode($output);
             }
@@ -37,10 +37,10 @@
                 $sub_array[] = $row["sem_nom"];
                 $sub_array[] = $row["sem_anno"];
                 $sub_array[] = $row["prof_nom"] ." ". $row["prof_apep"] ." ". $row["prof_apem"];
-                $sub_array[] = $row["sem_linea"];
+                $sub_array[] = $row["sem_sublinea"];
                 $sub_array[] = '<button type="button" onClick="editar('.$row["sem_id"].');"  id="'.$row["sem_id"].'" class="btn btn-outline-success btn-icon"><i class="bx bx-edit-alt"></i></button>';
                 $sub_array[] = '<button type="button" onClick="eliminar('.$row["sem_id"].');"  id="'.$row["sem_id"].'" class="btn btn-outline-danger btn-icon"><i class="bx bx-trash"></i></button>';
-                
+                $sub_array[] = '<button type="button" onClick="detalle_semillero('.$row["sem_id"].');"  id="'.$row["sem_id"].'" class="btn btn-outline-dark btn-icon"><i class="bx bx-book-content"></i></button>';
                 $data[] = $sub_array;
             }
             /*Formato del datatable, se usa siempre*/

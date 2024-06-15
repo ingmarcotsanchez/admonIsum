@@ -1,22 +1,22 @@
 <?php
     class Semillero extends Conectar{
-        public function insert_semillero($sem_nom,$sem_anno,$prof_id,$sem_linea){
+        public function insert_semillero($sem_nom,$sem_anno,$prof_id,$sem_sublinea){
 
             $conectar = parent::Conexion();
             parent::set_names();
-            $sql="INSERT INTO semilleros (sem_id, sem_nom, sem_anno, prof_id, sem_linea, est) VALUES (NULL,?,?,?,?,'1');";
+            $sql="INSERT INTO semilleros (sem_id, sem_nom, sem_anno, prof_id, sem_sublinea, est) VALUES (NULL,?,?,?,?,'1');";
      
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $sem_nom);
             $sql->bindValue(2, $sem_anno);
             $sql->bindValue(3, $prof_id);
-            $sql->bindValue(4, $sem_linea);
+            $sql->bindValue(4, $sem_sublinea);
             $sql->execute();
        
             return $resultado = $sql->fetchAll();
         }
 
-        public function update_semillero($sem_id,$sem_nom,$sem_anno,$prof_id,$sem_linea){
+        public function update_semillero($sem_id,$sem_nom,$sem_anno,$prof_id,$sem_sublinea){
           
             $conectar= parent::conexion();
             parent::set_names();
@@ -25,14 +25,14 @@
                     sem_nom = ?,
                     sem_anno = ?,
                     prof_id = ?,
-                    sem_linea = ?
+                    sem_sublinea = ?
                 WHERE
                     sem_id = ?";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $sem_nom);
             $sql->bindValue(2, $sem_anno);
             $sql->bindValue(3, $prof_id);
-            $sql->bindValue(4, $sem_linea);
+            $sql->bindValue(4, $sem_sublinea);
             $sql->bindValue(5, $sem_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
@@ -55,7 +55,7 @@
             semilleros.sem_id,
             semilleros.sem_nom,
             semilleros.sem_anno,
-            semilleros.sem_linea,
+            semilleros.sem_sublinea,
             profesor.prof_id,
             profesor.prof_nom,
             profesor.prof_apep,

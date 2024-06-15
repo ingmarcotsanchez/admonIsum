@@ -101,7 +101,7 @@ function editar(sem_id){
         $('#sem_nom').val(data.sem_nom);
         $('#sem_anno').val(data.sem_anno);
         $('#prof_id').val(data.prof_id).trigger('change');
-        $('#sem_linea').val(data.sem_linea);
+        $('#sem_sublinea').val(data.sem_sublinea);
     });
     $('#titulo_modal').html('Editar Semillero');
     $('#modalcrearSemillero').modal('show');

@@ -14,22 +14,52 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="sem_nom">Semillero</label>
+                                <label for="sem_nom">Nombre del Semillero</label>
                                 <input type="text" class="form-control" name="sem_nom" id="sem_nom" placeholder="Ingrese el nombre del Semillero">
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group">
-                                <label for="sem_anno">Año</label>
+                                <label for="sem_anno">Año de creación</label>
                                 <input type="text" class="form-control" name="sem_anno" id="sem_anno" placeholder="Ingrese el Año de creación">
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="form-group">
+                                <label for="prof_id">Líder</label>
+                                <select class="form-control select2" style="width:100%" name="prof_id" id="prof_id" data-placeholder="Seleccione">
+                                    <option label="Seleccione"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="grup_id">Grupo de Investigación</label>
+                                <select class="form-control select2" style="width:100%" name="grup_id" id="grup_id" data-placeholder="Seleccione">
+                                
+                                    <option label="Seleccione"></option>
+
+                                </select>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="sem_linea">Línea</label>
-                                <select class="form-control select2" name="sem_linea" id="sem_linea" data-placeholder="Seleccione">
+                                <label for="linea_id">Línea de Investigación</label>
+                                <select class="form-control select2" style="width:100%" name="linea_id" id="linea_id" data-placeholder="Seleccione">
+                                
+                                    <option label="Seleccione"></option>
+
+                                </select>
+                            </div>
+                        </div> 
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="sem_sublinea">Sub Línea</label>
+                                <select class="form-control select2" name="sem_sublinea" id="sem_sublinea" data-placeholder="Seleccione">
                                     <option label="Seleccione"></option>
                                     <option value="A">Arquitectura de Datos</option>
                                     <option value="I">Ingeniería de Software</option>
@@ -41,10 +71,24 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="sem_prof">Líder</label>
-                                <select class="form-control select2" style="width:100%" name="prof_id" id="prof_id" data-placeholder="Seleccione">
-                                    <option label="Seleccione"></option>
-                                </select>
+                                <label for="sem_mision">Misión</label>
+                                <input type="text" class="form-control" name="sem_mision" id="sem_mision" placeholder="Ingrese la misión del semillero">
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="sem_vision">Visión</label>
+                                <input type="text" class="form-control" name="sem_vision" id="sem_vision" placeholder="Ingrese la visión del semillero">
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="sem_objetivo">Objetivo General</label>
+                                <input type="text" class="form-control" name="sem_objetivo" id="sem_objetivo" placeholder="Ingrese el Objetivo General del semillero">
                             </div>
                         </div>
                     </div>   
