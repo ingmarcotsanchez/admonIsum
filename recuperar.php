@@ -49,7 +49,7 @@
                 case "2";
                     ?>
                     <div class="alert alert-success" role="alert">
-                    Su clave fue enviada a el correo registrado!
+                    Su clave fue enviada al correo registrado!
                     </div>
                     <?php
                     break;

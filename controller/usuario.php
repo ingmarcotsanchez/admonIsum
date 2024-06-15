@@ -61,11 +61,7 @@
                 "aaData"=>$data);
             echo json_encode($results);
             break;
-        case "porcentajeActivos":
-            $estudiantes->total_estudiantes();
-            $activos->total_activos();
-            $porcentajeActivos=$activos * 100 /$estudiantes;
-            break;
+       
         case "editPerfil":
             $usuario->update_perfil($_POST["usu_id"],$_POST["usu_pass"]);
             break;
