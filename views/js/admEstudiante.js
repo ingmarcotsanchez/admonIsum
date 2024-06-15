@@ -37,7 +37,7 @@ function guardaryeditar(e){
 $(document).ready(function(){
 
     $('input#est_dni').keypress(function (event) {
-        if (event.which < 48 || event.which > 57 || this.value.length === 10) {
+        if (event.which < 18 || event.which > 57 || this.value.length === 10) {
           return false;
         }
     });
@@ -47,7 +47,7 @@ $(document).ready(function(){
         var longitudCedula = $("#est_dni").val().length; //CUENTO LONGITUD
       
       //Valido la longitud 
-        if(longitudCedula >= 8){
+        if(longitudCedula >= 3){
             var dataString = 'est_dni=' + est_dni;
       
             $.ajax({

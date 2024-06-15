@@ -6,10 +6,12 @@
             if(isset($_POST["enviar"])){
                 $usu_correo = $_POST["correo"];
                 $usu_pass = $_POST["passwd"];
+
                 if(empty($usu_correo) and empty($usu_pass)){
                     header("Location:".Conectar::ruta()."index.php?m=2");
                     exit();
                 }else{
+                    
                     $sql = "SELECT * FROM usuario WHERE usu_correo=? and usu_pass=? and est=1";
                     $stmt = $conectar->prepare($sql);
                     $stmt->bindValue(1,$usu_correo);
@@ -32,7 +34,148 @@
                     }
                 }
             }
-        }   
+        } 
+        
+        public function recuperar(){
+            $conectar = parent::Conexion();
+            parent::set_names();
+            
+
+            if(isset($_POST["enviar"])){
+                $usu_correo = $_POST["correo"];
+                
+                if(empty($usu_correo)){
+                    header("Location:".Conectar::ruta()."recuperar.php?m=3");
+                    exit();
+                }elseif(!empty($usu_correo)){
+                    $sql = "SELECT usu_correo FROM usuario WHERE usu_correo=?";
+                    $stmt = $conectar->prepare($sql);
+                    $stmt->bindValue(1,$usu_correo);
+                    $stmt->execute();
+                    $resultado = $stmt->fetch();
+                    var_dump($resultado);
+                    if($resultado == false){
+                        header("Location:".Conectar::ruta()."recuperar.php?m=1");
+                        exit();
+                    }else{
+                        $logitudPass = 5;
+                        $miPassword = substr( md5(microtime()), 1, $logitudPass);
+                        $clave = $miPassword;
+                        var_dump($clave);
+                        $updateClave = "UPDATE usuario SET usu_pass='$clave' WHERE usu_correo=? ";
+                        $stmt = $conectar->prepare($updateClave);
+                        $stmt->bindValue(1,$usu_correo);
+                        $stmt->execute();
+                        $resultado = $stmt->fetch();
+                       
+                        $destinatario = $usu_correo; 
+                        $asunto = "Recuperando Clave";
+                        $cuerpo = '
+                                    <!DOCTYPE html>
+                                    <html lang="es">
+                                    <head>
+                                    <title>Recuperar Clave de Usuario</title>';
+                        $cuerpo .= ' 
+                                    <style>
+                                        * {
+                                            margin: 0;
+                                            padding: 0;
+                                            box-sizing: border-box;
+                                        }
+                                        body {
+                                            font-family: "Roboto", sans-serif;
+                                            font-size: 16px;
+                                            font-weight: 300;
+                                            color: #888;
+                                            background-color:rgba(230, 225, 225, 0.5);
+                                            line-height: 30px;
+                                            text-align: center;
+                                        }
+                                        .contenedor{
+                                            width: 80%;
+                                            min-height:auto;
+                                            text-align: center;
+                                            margin: 0 auto;
+                                            background: #ececec;
+                                            border-top: 3px solid #E64A19;
+                                        }
+                                        .btnlink{
+                                            padding:15px 30px;
+                                            text-align:center;
+                                            background-color:#cecece;
+                                            color: crimson !important;
+                                            font-weight: 600;
+                                            text-decoration: blue;
+                                        }
+                                        .btnlink:hover{
+                                            color: #fff !important;
+                                        }
+                                        .imgBanner{
+                                            width:100%;
+                                            margin-left: auto;
+                                            margin-right: auto;
+                                            display: block;
+                                            padding:0px;
+                                        }
+                                        .misection{
+                                            color: #34495e;
+                                            margin: 4% 10% 2%;
+                                            text-align: center;
+                                            font-family: sans-serif;
+                                        }
+                                        .mt-5{
+                                            margin-top:50px;
+                                        }
+                                        .mb-5{
+                                            margin-bottom:50px;
+                                        }
+                                    </style>
+                        ';
+
+                        $cuerpo .= '
+                                    </head>
+                                    <body>
+                                        <div class="contenedor">
+                                            <img class="imgBanner" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fincentivosbancasegurosbpop.segurosalfa.com.co%2Fweb%2Fasesores%2Frecuperar-contrasena&psig=AOvVaw32-AJpOJCqpQQXN8C5KjE3&ust=1718391111678000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJD_0fGf2YYDFQAAAAAdAAAAABAE">
+                                            <table style="max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;">
+                                                <tr>
+                                                    <td style="background-color: #ffffff;">
+                                                        <div class="misection">
+                                                            <h2 style="color: red; margin: 0 0 7px">Hola, '.$_SESSION['usu_nom'].'</h2>
+                                                            <p style="margin: 2px; font-size: 18px">te hemos creado una nueva clave temporal para que puedas iniciar sesión, la clave temporal es: <strong>'.$clave.'</strong> </p>
+                                                            <p>&nbsp;</p>
+                                                            <p>&nbsp;</p>
+                                                            <a href="https://localhost/ISUM/" class="btnlink">Iniciar Sesión </a>
+                                                            <p>&nbsp;</p>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>'; 
+                        $cuerpo .= '
+                                        </div>
+                                    </body>
+                                </html>';
+        
+                        $headers  = "MIME-Version: 1.0\r\n"; 
+                        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
+                        $headers .= "From: WebDeveloper\r\n"; 
+                        $headers .= "Reply-To: "; 
+                        $headers .= "Return-path:"; 
+                        $headers .= "Cc:"; 
+                        $headers .= "Bcc:"; 
+                        (mail($destinatario,$asunto,$cuerpo,$headers));
+                        header("Location:".Conectar::ruta()."recuperar.php?m=2");
+                        exit();
+                    }
+                }else{
+                    header("Location:".Conectar::ruta()."recuperar.php");
+                    exit();
+                }
+                
+
+            }
+
+        }
         
         public function insert_usuario($usu_nom,$usu_apep,$usu_apem,$usu_correo,$usu_pass,$usu_rol){
 
@@ -49,6 +192,20 @@
             $sql->bindValue(6, $usu_rol);
             $sql->execute();
        
+            return $resultado = $sql->fetchAll();
+        }
+
+        public function update_perfil($usu_id,$usu_pass){
+            $conectar = parent::Conexion();
+            parent::set_names();
+            $sql = "UPDATE usuario 
+                    SET 
+                    usu_clave = ?
+                    WHERE usu_id = ?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$usu_pass);
+            $sql->bindValue(2,$usu_id);
+            $sql->execute();
             return $resultado = $sql->fetchAll();
         }
 

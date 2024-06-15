@@ -79,6 +79,9 @@
           </div>
         </div>
       </form>
+      <p class="mb-1 py-1">
+        <a href="recuperar.php">Recuperar clave</a>
+      </p>
     </div>
     <!-- /.card-body -->
   </div>

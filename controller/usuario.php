@@ -6,9 +6,11 @@
     switch($_GET["opc"]){
         case "guardaryeditar":
             if(empty($_POST["usu_id"])){
-                $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["usu_rol"]);
+               // $PasswordHash = password_hash($_POST["usu_pass"], PASSWORD_BCRYPT);
+                $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_correo"],$P_POST["usu_pass"],$_POST["usu_rol"]);
             }else{
-                $usuario->update_usuario($_POST["usu_id"],$_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_pass"],$_POST["usu_rol"]);
+                //$PasswordHash = password_hash($_POST["usu_pass"], PASSWORD_BCRYPT);
+                $usuario->update_usuario($_POST["usu_id"],$_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$P_POST["usu_pass"],$_POST["usu_rol"]);
             }
             break;
         case "crear":
@@ -59,6 +61,15 @@
                 "aaData"=>$data);
             echo json_encode($results);
             break;
+        case "porcentajeActivos":
+            $estudiantes->total_estudiantes();
+            $activos->total_activos();
+            $porcentajeActivos=$activos * 100 /$estudiantes;
+            break;
+        case "editPerfil":
+            $usuario->update_perfil($_POST["usu_id"],$_POST["usu_pass"]);
+            break;
+
         case "total_Profesores":
             $datos=$usuario->total_profesores();
             if(is_array($datos)==true and count($datos)>0){

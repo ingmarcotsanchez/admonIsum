@@ -108,6 +108,8 @@ $(document).ready(function(){
 
 });
 
+
+
 function nuevo(){
     $('#titulo_modal').html('Nuevo Usuario');
     $('#usuario_form')[0].reset();

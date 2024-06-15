@@ -58,7 +58,10 @@ $(document).ready(function(){
         data = JSON.parse(data);
         $('#lbltotalActivos').html(data.total);
     });
+
     
 });
+
+
 
 
