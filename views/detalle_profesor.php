@@ -6,8 +6,72 @@ require_once("../config/conexion.php");
 require_once("../models/Profesor.php");
     $profesor = new Profesor();
     $prof = $profesor->get_profesorDetallexid($_GET['prof_id']);
-    //var_dump($prof);
-    //$ruta_imagen = $prof['prof_image'];
+require_once("../models/Producto_profesor.php");
+    $profesor2 = new Producto_profesor();
+    $totponext = $profesor2->total_ponencias_ext($_GET['prof_id']);
+    if(is_array($totponext)==true and count($totponext)>0){
+        foreach($totponext as $row)
+        {
+            $output_ponencias_ext["total"] = $row["total"];
+        }
+        //echo json_encode($output_ponencias_ext);
+    }
+    $totponint = $profesor2->total_ponencias_int($_GET['prof_id']);
+    if(is_array($totponint)==true and count($totponint)>0){
+        foreach($totponint as $row)
+        {
+            $output_ponencias_int["total"] = $row["total"];
+        }
+        //echo json_encode($output_ponencias_int);
+    }
+    $totartdiv = $profesor2->total_articulos_div($_GET['prof_id']);
+    if(is_array($totartdiv)==true and count($totartdiv)>0){
+        foreach($totartdiv as $row)
+        {
+            $output_articulo_div["total"] = $row["total"];
+        }
+        //echo json_encode($output_articulo_div);
+    }
+    $totartcien = $profesor2->total_articulos_cien($_GET['prof_id']);
+    if(is_array($totartcien)==true and count($totartcien)>0){
+        foreach($totartcien as $row)
+        {
+            $output_articulo_cien["total"] = $row["total"];
+        }
+        //echo json_encode($output_articulo_cien);
+    }
+    $totartscopus = $profesor2->total_articulos_scopus($_GET['prof_id']);
+    if(is_array($totartscopus)==true and count($totartscopus)>0){
+        foreach($totartscopus as $row)
+        {
+            $output_articulo_scopus["total"] = $row["total"];
+        }
+        //echo json_encode($output_articulo_scopus);
+    }
+    $totsoft = $profesor2->total_software($_GET['prof_id']);
+    if(is_array($totsoft)==true and count($totsoft)>0){
+        foreach($totsoft as $row)
+        {
+            $output_software["total"] = $row["total"];
+        }
+        //echo json_encode($output_software);
+    }
+    $totcapitulo = $profesor2->total_capitulos($_GET['prof_id']);
+    if(is_array($totcapitulo)==true and count($totcapitulo)>0){
+        foreach($totcapitulo as $row)
+        {
+            $output_capitulos["total"] = $row["total"];
+        }
+        //echo json_encode($output_capitulos);
+    }
+    $totlibro = $profesor2->total_libros($_GET['prof_id']);
+    if(is_array($totlibro)==true and count($totlibro)>0){
+        foreach($totlibro as $row)
+        {
+            $output_libros["total"] = $row["total"];
+        }
+        //echo json_encode($output_libros);
+    }
                                         
                                 
 require_once("../models/Evaluacion.php");
@@ -163,100 +227,85 @@ if(isset($_SESSION["usu_id"])){
                                             </div>
                                         </div>
                                     </div>
-                                    <!--
+                                    
                                     <div class="card">
-                                        <div class="row p-2">                                 
+                                        <div class="row p-2">   
+                                                                          
                                             <div class="col-lg-3 col-6">
                                                 <div class="small-box bg-light">
                                                     <div class="inner">
-                                                        <h3>150</h3>
+                                                        <h3><?php echo $output_articulo_div["total"];?></h3>
                                                         <p>Articulos Divulgativos</p>
                                                     </div>
-                                                    <div class="icon">
-                                                        <i class='bx bx-file'></i>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-6">
-                                                <div class="small-box bg-secondary">
+                                                <div class="small-box bg-light">
                                                     <div class="inner">
-                                                        <h3>53</h3>
+                                                        <h3><?php echo $output_articulo_cien["total"];?></h3>
                                                         <p>Articulos Cientificos</p>
                                                     </div>
-                                                    <div class="icon">
-                                                        <i class='bx bx-detail'></i>
-                                                    </div>
+                                                
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-6">
-                                                <div class="small-box bg-success">
+                                                <div class="small-box bg-light">
                                                     <div class="inner">
-                                                        <h3>44</h3>
+                                                        <h3><?php echo $output_articulo_scopus["total"];?></h3>
                                                         <p>Articulos Scopus</p>
                                                     </div>
-                                                    <div class="icon">
-                                                        <i class='bx bx-spreadsheet'></i>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-6">
-                                                <div class="small-box bg-dark">
+                                                <div class="small-box bg-light">
                                                     <div class="inner">
-                                                        <h3>65</h3>
-                                                        <p>Desarrollos de Software</p>
+                                                        <h3><?php echo $output_software["total"];?></h3>
+                                                        <p>Software</p>
                                                     </div>
-                                                    <div class="icon">
-                                                        <i class='bx bx-code-alt'></i>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-6">
-                                                <div class="small-box bg-primary">
+                                                <div class="small-box bg-light">
                                                     <div class="inner">
-                                                        <h3>150</h3>
+                                                        <h3><?php echo $output_ponencias_int["total"];?></h3>
                                                         <p>Ponencias Internas</p>
                                                     </div>
-                                                    <div class="icon">
-                                                        <i class='bx bx-user-voice'></i>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-6">
-                                                <div class="small-box bg-info">
+                                                <div class="small-box bg-light">
                                                     <div class="inner">
-                                                        <h3>53</h3>
+                                                        <h3><?php echo $output_ponencias_ext["total"];?></h3>
                                                         <p>Ponencias Externas</p>
                                                     </div>
-                                                    <div class="icon">
-                                                        <i class='bx bxs-user-detail'></i>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-6">
-                                                <div class="small-box bg-warning">
+                                                <div class="small-box bg-light">
                                                     <div class="inner">
-                                                        <h3>44</h3>
+                                                        <h3><?php echo $output_capitulos["total"];?></h3>
                                                         <p>Capitulo de libro</p>
                                                     </div>
-                                                    <div class="icon">
-                                                        <i class='bx bx-book-content'></i>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-6">
-                                                <div class="small-box bg-danger">
+                                                <div class="small-box bg-light">
                                                     <div class="inner">
-                                                        <h3>65</h3>
+                                                        <h3><?php echo $output_libros["total"];?></h3>
                                                         <p>Libros</p>
                                                     </div>
-                                                    <div class="icon">
-                                                        <i class='bx bx-book-open'></i>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                                        -->
+                                                        
                                 </div>
                             </div>
                         </div>

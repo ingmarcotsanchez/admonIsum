@@ -107,5 +107,78 @@
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
+
+        public function total_ponencias_ext($prof_id){
+            $conectar = parent::Conexion();
+            parent::set_names();
+            $sql = "SELECT count(*) as total FROM product_profesor WHERE est = 1  AND prof_id=? AND prod_prof_tipo = 'PE'";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$prof_id);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+        }
+        public function total_ponencias_int($prof_id){
+            $conectar = parent::Conexion();
+            parent::set_names();
+            $sql = "SELECT count(*) as total FROM product_profesor WHERE est = 1  AND prof_id=? AND prod_prof_tipo = 'PI'";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$prof_id);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+        }
+        public function total_articulos_div($prof_id){
+            $conectar = parent::Conexion();
+            parent::set_names();
+            $sql = "SELECT count(*) as total FROM product_profesor WHERE est = 1  AND prof_id=? AND prod_prof_tipo = 'AD'";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$prof_id);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+        }
+        public function total_articulos_cien($prof_id){
+            $conectar = parent::Conexion();
+            parent::set_names();
+            $sql = "SELECT count(*) as total FROM product_profesor WHERE est = 1  AND prof_id=? AND prod_prof_tipo = 'AC'";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$prof_id);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+        }
+        public function total_articulos_scopus($prof_id){
+            $conectar = parent::Conexion();
+            parent::set_names();
+            $sql = "SELECT count(*) as total FROM product_profesor WHERE est = 1  AND prof_id=? AND prod_prof_tipo = 'AS'";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$prof_id);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+        }
+        public function total_capitulos($prof_id){
+            $conectar = parent::Conexion();
+            parent::set_names();
+            $sql = "SELECT count(*) as total FROM product_profesor WHERE est = 1  AND prof_id=? AND prod_prof_tipo = 'CL'";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$prof_id);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+        }
+        public function total_libros($prof_id){
+            $conectar = parent::Conexion();
+            parent::set_names();
+            $sql = "SELECT count(*) as total FROM product_profesor WHERE est = 1  AND prof_id=? AND prod_prof_tipo = 'LI'";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$prof_id);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+        }
+        public function total_software($prof_id){
+            $conectar = parent::Conexion();
+            parent::set_names();
+            $sql = "SELECT count(*) as total FROM product_profesor WHERE est = 1  AND prof_id=? AND prod_prof_tipo = 'DS'";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$prof_id);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+        }
     }
 ?>

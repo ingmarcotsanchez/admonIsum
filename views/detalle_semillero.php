@@ -12,7 +12,7 @@ require_once("../models/Semillero.php");
         {
             $output_ponencias["total"] = $row["total"];
         }
-        echo json_encode($output_ponencias);
+        //echo json_encode($output_ponencias);
     }
     $totart = $semillero->total_articulos_semillero($_GET['sem_id']);
     if(is_array($totart)==true and count($totart)>0){
@@ -20,7 +20,7 @@ require_once("../models/Semillero.php");
         {
             $output_articulos["total"] = $row["total"];
         }
-        echo json_encode($output_articulos);
+        //echo json_encode($output_articulos);
     }
     $totdes = $semillero->total_desarrollos_semillero($_GET['sem_id']);
     if(is_array($totdes)==true and count($totdes)>0){
@@ -28,7 +28,7 @@ require_once("../models/Semillero.php");
         {
             $output_desarrollos["total"] = $row["total"];
         }
-        echo json_encode($output_desarrollos);
+        //echo json_encode($output_desarrollos);
     }
         
 
@@ -86,12 +86,12 @@ if(isset($_SESSION["usu_id"])){
                                     <div class="info-box">
                                         <span class="info-box-icon bg-info"><i class="fas fa-edit"></i></span>
 
-                                    <div class="info-box-content">
-                                        <h5 class="info-box-text">Cantidad de Ponencias</h5>
-                                        <span class="info-box-number h4">
-                                        <?php echo $output_ponencias["total"];?>
-                                        </span>
-                                    </div>
+                                        <div class="info-box-content">
+                                            <h5 class="info-box-text">Cantidad de Ponencias</h5>
+                                            <span class="info-box-number h4">
+                                            <?php echo $output_ponencias["total"];?>
+                                            </span>
+                                        </div>
                                     <!-- /.info-box-content -->
                                     </div>
                                     <!-- /.info-box -->
