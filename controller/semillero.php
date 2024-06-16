@@ -7,9 +7,9 @@
         
         case "guardaryeditar":
             if(empty($_POST["sem_id"])){
-                $semillero->insert_semillero($_POST["sem_nom"],$_POST["sem_anno"],$_POST["prof_id"],$_POST["grup_id"],$_POST["linea_id"],$_POST["sublinea_id"],$_POST["sem_mision"],$_POST["sem_vision"],$_POST["sem_objetivo"]);
+                $semillero->insert_semillero($_POST["sem_nom"],$_POST["sem_cod"],$_POST["sem_anno"],$_POST["prof_id"],$_POST["grup_id"],$_POST["linea_id"],$_POST["sublinea_id"],$_POST["sem_mision"],$_POST["sem_vision"],$_POST["sem_objetivo"]);
             }else{
-                $semillero->update_semillero($_POST["sem_id"],$_POST["sem_nom"],$_POST["sem_anno"],$_POST["prof_id"],$_POST["grup_id"],$_POST["linea_id"],$_POST["sublinea_id"],$_POST["sem_mision"],$_POST["sem_vision"],$_POST["sem_objetivo"]);
+                $semillero->update_semillero($_POST["sem_id"],$_POST["sem_nom"],$_POST["sem_cod"],$_POST["sem_anno"],$_POST["prof_id"],$_POST["grup_id"],$_POST["linea_id"],$_POST["sublinea_id"],$_POST["sem_mision"],$_POST["sem_vision"],$_POST["sem_objetivo"]);
             }
             break;
         case "mostrar":
@@ -18,6 +18,7 @@
                 foreach($datos as $row){
                     $output["sem_id"] = $row["sem_id"];
                     $output["sem_nom"] = $row["sem_nom"];
+                    $output["sem_cod"] = $row["sem_cod"];
                     $output["sem_anno"] = $row["sem_anno"];
                     $output["prof_id"] = $row["prof_id"];
                     $output["grup_id"] = $row["grup_id"];
@@ -40,6 +41,7 @@
                 $sub_array = array();
                 //columnas de las tablas a mostrar segun select del modelo
                 $sub_array[] = $row["sem_nom"];
+                $sub_array[] = $row["sem_cod"];
                 $sub_array[] = $row["sem_anno"];
                 $sub_array[] = $row["prof_nom"] ." ". $row["prof_apep"] ." ". $row["prof_apem"];
                 $sub_array[] = '<button type="button" onClick="editar('.$row["sem_id"].');"  id="'.$row["sem_id"].'" class="btn btn-outline-success btn-icon"><i class="bx bx-edit-alt"></i></button>';
@@ -66,7 +68,7 @@
             }
             break;
         
-        
+           
             
      
     }

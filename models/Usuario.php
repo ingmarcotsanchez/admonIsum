@@ -263,6 +263,8 @@
             return $resultado = $sql->fetchAll();
         }
 
+       
+
         public function total_profesores(){
             $conectar= parent::conexion();
             parent::set_names();

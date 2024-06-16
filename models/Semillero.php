@@ -1,33 +1,35 @@
 <?php
     class Semillero extends Conectar{
-        public function insert_semillero($sem_nom,$sem_anno,$prof_id,$grup_id,$linea_id,$sublinea_id,$sem_mision,$sem_vision,$sem_objetivo){
+        public function insert_semillero($sem_nom,$sem_cod,$sem_anno,$prof_id,$grup_id,$linea_id,$sublinea_id,$sem_mision,$sem_vision,$sem_objetivo){
 
             $conectar = parent::Conexion();
             parent::set_names();
-            $sql="INSERT INTO semilleros (sem_id, sem_nom, sem_anno, prof_id, grup_id, linea_id, sublinea_id, sem_mision, sem_vision, sem_objetivo, est) VALUES (NULL,?,?,?,?,?,?,?,?,?,'1');";
+            $sql="INSERT INTO semilleros (sem_id, sem_nom, sem_cod, sem_anno, prof_id, grup_id, linea_id, sublinea_id, sem_mision, sem_vision, sem_objetivo, est) VALUES (NULL,?,?,?,?,?,?,?,?,?,'1');";
      
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $sem_nom);
-            $sql->bindValue(2, $sem_anno);
-            $sql->bindValue(3, $prof_id);
-            $sql->bindValue(4, $grup_id);
-            $sql->bindValue(5, $linea_id);
-            $sql->bindValue(6, $sublinea_id);
-            $sql->bindValue(7, $sem_mision);
-            $sql->bindValue(8, $sem_vision);
-            $sql->bindValue(9, $sem_objetivo);
+            $sql->bindValue(2, $sem_cod);
+            $sql->bindValue(3, $sem_anno);
+            $sql->bindValue(4, $prof_id);
+            $sql->bindValue(5, $grup_id);
+            $sql->bindValue(6, $linea_id);
+            $sql->bindValue(7, $sublinea_id);
+            $sql->bindValue(8, $sem_mision);
+            $sql->bindValue(9, $sem_vision);
+            $sql->bindValue(10, $sem_objetivo);
             $sql->execute();
        
             return $resultado = $sql->fetchAll();
         }
 
-        public function update_semillero($sem_id,$sem_nom,$sem_anno,$prof_id,$grup_id,$linea_id,$sublinea_id,$sem_mision,$sem_vision,$sem_objetivo){
+        public function update_semillero($sem_id,$sem_nom,$sem_cod,$sem_anno,$prof_id,$grup_id,$linea_id,$sublinea_id,$sem_mision,$sem_vision,$sem_objetivo){
           
             $conectar= parent::conexion();
             parent::set_names();
             $sql="UPDATE semilleros
                 SET
                     sem_nom = ?,
+                    sem_cod = ?,
                     sem_anno = ?,
                     prof_id = ?,
                     grup_id = ?,
@@ -40,15 +42,16 @@
                     sem_id = ?";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $sem_nom);
-            $sql->bindValue(2, $sem_anno);
-            $sql->bindValue(3, $prof_id);
-            $sql->bindValue(4, $grup_id);
-            $sql->bindValue(5, $linea_id);
-            $sql->bindValue(6, $sublinea_id);
-            $sql->bindValue(7, $sem_mision);
-            $sql->bindValue(8, $sem_vision);
-            $sql->bindValue(9, $sem_objetivo);
-            $sql->bindValue(10, $sem_id);
+            $sql->bindValue(2, $sem_cod);
+            $sql->bindValue(3, $sem_anno);
+            $sql->bindValue(4, $prof_id);
+            $sql->bindValue(5, $grup_id);
+            $sql->bindValue(6, $linea_id);
+            $sql->bindValue(7, $sublinea_id);
+            $sql->bindValue(8, $sem_mision);
+            $sql->bindValue(9, $sem_vision);
+            $sql->bindValue(10, $sem_objetivo);
+            $sql->bindValue(11, $sem_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
@@ -69,6 +72,7 @@
             $sql = "SELECT
             semilleros.sem_id,
             semilleros.sem_nom,
+            semilleros.sem_cod,
             semilleros.sem_anno,
             profesor.prof_id,
             profesor.prof_nom,
@@ -88,6 +92,7 @@
             $sql = "SELECT
             semilleros.sem_id,
             semilleros.sem_nom,
+            semilleros.sem_cod,
             semilleros.sem_anno,
             profesor.prof_id,
             profesor.prof_nom,
@@ -140,6 +145,36 @@
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();
+        }
+
+        public function total_ponencias_semillero($sem_id){
+            $conectar = parent::Conexion();
+            parent::set_names();
+            $sql = "SELECT count(*) as total FROM productos WHERE est = 1  AND sem_id=? AND prod_tipo LIKE 'P%'";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$sem_id);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+        }
+
+        public function total_articulos_semillero($sem_id){
+            $conectar = parent::Conexion();
+            parent::set_names();
+            $sql = "SELECT count(*) as total FROM productos WHERE est = 1  AND sem_id=? AND prod_tipo LIKE 'A%'";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$sem_id);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+        }
+
+        public function total_desarrollos_semillero($sem_id){
+            $conectar = parent::Conexion();
+            parent::set_names();
+            $sql = "SELECT count(*) as total FROM productos WHERE est = 1  AND sem_id=? AND prod_tipo = 'DS'";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$sem_id);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
         }
     }
 ?>

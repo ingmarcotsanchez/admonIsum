@@ -35,6 +35,7 @@ function guardaryeditar(e){
 }
 
 $(document).ready(function(){
+
     $('#prof_id').select2({
         dropdownParent: $("#modalcrearSemillero")
     });
@@ -115,6 +116,7 @@ function editar(sem_id){
         console.log(data);
         $('#sem_id').val(data.sem_id);
         $('#sem_nom').val(data.sem_nom);
+        $('#sem_cod').val(data.sem_cod);
         $('#sem_anno').val(data.sem_anno);
         $('#prof_id').val(data.prof_id).trigger('change');
         $('#grup_id').val(data.grup_id).trigger('change');
@@ -174,6 +176,11 @@ function select_sublinea(){
     $.post("/ISUM/controller/sublinea.php?opc=combo",function (data){
         $('#sublinea_id').html(data);
     });
+}
+
+function detalle_semillero(sem_id){
+    console.log(sem_id);
+    window.open('detalle_semillero.php?sem_id='+sem_id+'');
 }
 
 init();

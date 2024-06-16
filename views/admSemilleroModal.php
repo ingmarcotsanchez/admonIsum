@@ -12,10 +12,16 @@
                     
                     <input type="hidden" name="sem_id" id="sem_id">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-8">
                             <div class="form-group">
                                 <label for="sem_nom">Nombre del Semillero</label>
                                 <input type="text" class="form-control" name="sem_nom" id="sem_nom" placeholder="Ingrese el nombre del Semillero">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="sem_cod">Código del Semillero</label>
+                                <input type="text" class="form-control" name="sem_cod" id="sem_cod" placeholder="Ingrese el código del Semillero">
                             </div>
                         </div>
                     </div>

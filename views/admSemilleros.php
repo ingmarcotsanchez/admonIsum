@@ -46,6 +46,7 @@ if(isset($_SESSION["usu_id"])){
                                 <thead>
                                     <tr>
                                         <th>Semillero</th>
+                                        <th>Código</th>
                                         <th>Año</th>
                                         <th>Líder</th>
                                         <th></th>

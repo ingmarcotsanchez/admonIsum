@@ -107,6 +107,9 @@
                 echo json_encode($output);
             }
             break;
+
+    
+
         case "total_Productos_satsoc":
             $datos=$usuario->total_productos_satsoc();
             if(is_array($datos)==true and count($datos)>0){
