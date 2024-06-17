@@ -13,6 +13,9 @@
 <!-- Select2 -->
 <link rel="stylesheet" href="/ISUM/html/plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="/ISUM/html/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+<!-- summernote -->
+<link rel="stylesheet" href="/ISUM/html/plugins/summernote/summernote-bs4.min.css">
+  
 <!-- Theme style -->
 <link rel="stylesheet" href="../html/dist/css/adminlte.min.css">
 <link rel="stylesheet" href="../html/dist/css/profesor.css">

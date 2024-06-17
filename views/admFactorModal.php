@@ -10,7 +10,7 @@
             <form method="post" id="factor_form">
                 <div class="modal-body">
                     
-                    <input type="text" name="fac_id" id="fac_id">
+                    <input type="hidden" name="fac_id" id="fac_id">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">

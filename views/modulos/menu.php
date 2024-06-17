@@ -190,6 +190,25 @@
             </a>
           </li>
           <?php endif; ?>
+          <li class="nav-header">SOPORTE</li>
+          <li class="nav-item">
+            <a href="<?php echo BASE_URL; ?>admTikets.php" class="nav-link">
+              <i class="nav-icon fas fa-th text-light"></i>
+              <p class="text">Tickets</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo BASE_URL; ?>admNuevoTikets.php" class="nav-link">
+              <i class="nav-icon fas fa-plus text-light"></i>
+              <p class="text">Crear Ticket</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo BASE_URL; ?>admConsultarTikets.php" class="nav-link">
+              <i class="nav-icon fas fa-search text-light"></i>
+              <p class="text">Consultar Ticket</p>
+            </a>
+          </li>
           <li class="nav-header">LOGOUT</li>
           <li class="nav-item">
             <a href="<?php echo BASE_URL; ?>Logout.php" class="nav-link">

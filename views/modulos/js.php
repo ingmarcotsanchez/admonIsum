@@ -19,5 +19,8 @@
 <script src="/ISUM/html/plugins/select2/js/select2.full.min.js"></script>
 <!-- sweetalert -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Summernote -->
+<script src="/ISUM/html//plugins/summernote/summernote-bs4.min.js"></script>
+
 <!-- AdminLTE App -->
 <script src="../html/dist/js/adminlte.min.js"></script>
