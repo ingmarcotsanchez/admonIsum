@@ -255,19 +255,19 @@
             return $resultado=$sql->fetchAll();
         } */
 
-       /*  public function get_ticket_total(){
+        public function get_ticket_total(){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT COUNT(*) as TOTAL FROM tm_ticket";
+            $sql="SELECT COUNT(*) as TOTAL FROM ticket";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();
-        } */
+        }
 
-      /*   public function get_ticket_totalabierto(){
+        public function get_ticket_totalabierto(){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT COUNT(*) as TOTAL FROM tm_ticket where tick_estado='Abierto'";
+            $sql="SELECT COUNT(*) as TOTAL FROM ticket where tick_estado='Abierto'";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();
@@ -276,27 +276,25 @@
         public function get_ticket_totalcerrado(){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT COUNT(*) as TOTAL FROM tm_ticket where tick_estado='Cerrado'";
+            $sql="SELECT COUNT(*) as TOTAL FROM ticket where tick_estado='Cerrado'";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();
-        }  */
+        }
 
-       /*  public function get_ticket_grafico(){
+        public function get_ticket_grafico(){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT tm_categoria.cat_nom as nom,COUNT(*) AS total
-                FROM   tm_ticket  JOIN  
-                    tm_categoria ON tm_ticket.cat_id = tm_categoria.cat_id  
-                WHERE    
-                tm_ticket.est = 1
-                GROUP BY 
-                tm_categoria.cat_nom 
-                ORDER BY total DESC";
+            $sql="SELECT categoria.cat_nom AS nom,COUNT(*) AS total
+            FROM ticket JOIN categoria ON ticket.cat_id = categoria.cat_id  
+            WHERE ticket.est = 1
+            GROUP BY 
+            categoria.cat_nom 
+            ORDER BY total DESC";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();
-        }  */
+        }
 
         /* TODO: Actualizar valor de estrellas de encuesta */
          /* public function insert_encuesta($tick_id,$tick_estre,$tick_comment){

@@ -209,7 +209,7 @@
                 }
                 echo json_encode($output);
             }
-        break;
+            break;
 
         case "totalabierto";
             $datos=$usuario->get_usuario_totalabierto_x_id($_POST["usu_id"]);  
@@ -220,7 +220,7 @@
                 }
                 echo json_encode($output);
             }
-        break;
+            break;
 
         case "totalcerrado";
             $datos=$usuario->get_usuario_totalcerrado_x_id($_POST["usu_id"]);  
@@ -231,15 +231,16 @@
                 }
                 echo json_encode($output);
             }
-        break;
+            break;
 
         case "grafico";
             $datos=$usuario->get_usuario_grafico($_POST["usu_id"]);  
             echo json_encode($datos);
-        break;
-        case "password":
-            $usuario->update_usuario_pass($_POST["usu_id"],$_POST["usu_pass"]);
             break;
+
+        /* case "password":
+            $usuario->update_usuario_pass($_POST["usu_id"],$_POST["usu_pass"]);
+            break; */
        
     }
 ?>

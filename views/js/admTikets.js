@@ -30,27 +30,27 @@ $(document).ready(function(){
                 xkey: 'nom',
                 ykeys: ['total'],
                 labels: ['Value'],
-                barColors: ["#1AB244"], 
+                barColors: ["#6a329f"], 
             });
         }); 
 
     }else{
-        $.post("/ISUM/controller/usuario.php?op=total", {usu_id:usu_id}, function (data) {
+        $.post("/ISUM/controller/ticket.php?opc=total", function (data) {
             data = JSON.parse(data);
             $('#lbltotalTickets').html(data.TOTAL);
         }); 
     
-        $.post("/ISUM/controller/usuario.php?op=totalabierto", {usu_id:usu_id}, function (data) {
+        $.post("/ISUM/controller/ticket.php?opc=totalabierto", function (data) {
             data = JSON.parse(data);
             $('#lbltotalTicketsAbiertos').html(data.TOTAL);
         });
     
-        $.post("/ISUM/controller/usuario.php?op=totalcerrado", {usu_id:usu_id}, function (data) {
+        $.post("/ISUM/controller/ticket.php?opc=totalcerrado", function (data) {
             data = JSON.parse(data);
             $('#lbltotalTicketsCerrados').html(data.TOTAL);
         });
 
-        $.post("/ISUM/controller/usuario.php?op=grafico", {usu_id:usu_id},function (data) {
+        $.post("/ISUM/controller/ticket.php?opc=grafico", function (data) {
             data = JSON.parse(data);
     
             new Morris.Bar({
@@ -59,7 +59,7 @@ $(document).ready(function(){
                 xkey: 'nom',
                 ykeys: ['total'],
                 labels: ['Value'],
-                barColors: ["#1AB244"], 
+                barColors: ["#2986cc"], 
             });
         }); 
 

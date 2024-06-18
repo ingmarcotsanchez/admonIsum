@@ -429,7 +429,7 @@
         } 
 
         /* TODO: Actualizar contraseña del usuario */
-        public function update_usuario_pass($usu_id,$usu_pass){
+        /* public function update_usuario_pass($usu_id,$usu_pass){
             $conectar= parent::conexion();
             parent::set_names();
             $sql="UPDATE usuario
@@ -442,7 +442,7 @@
             $sql->bindValue(2, $usu_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
-        } 
+        }  */
 
     }
 ?>

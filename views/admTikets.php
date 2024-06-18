@@ -14,8 +14,9 @@ if(isset($_SESSION["usu_id"])){
   <?php
     include("modulos/head.php");
   ?>
-  <title>ISUM | Home</title>
+  <title>ISUM | Tickets</title>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -85,7 +86,18 @@ if(isset($_SESSION["usu_id"])){
           </div>   
           <!-- ./col -->
         </div>
-        
+        <div class="row">
+          <div class="col-12">
+            <section class="card">
+              <header class="card-header">
+                Grafico Estadístico
+              </header>
+              <div class="card-block">
+                <div id="divgrafico" style="height: 250px;"></div>
+              </div>
+            </section>
+          </div>
+        </div>
       </div>
 
       
@@ -100,9 +112,9 @@ if(isset($_SESSION["usu_id"])){
 <?php
   include("modulos/js.php");
 ?>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <script type="text/javascript" src="js/admTikets.js"></script>
-<script type="text/javascript" src="js/inicio/barras.js"></script>
-
 
   
 </body>
