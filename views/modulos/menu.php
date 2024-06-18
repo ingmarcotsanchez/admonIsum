@@ -21,6 +21,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          <?php if($_SESSION["usu_rol"] == "C"):?>
           <li class="nav-header">INFORMACIÓN</li>
           <li class="nav-item">
             <a href="<?php echo BASE_URL; ?>inicio.php" class="nav-link">
@@ -28,6 +29,7 @@
               <p>Inicio</p>
             </a>
           </li>
+          <?php endif; ?>
           <?php if($_SESSION["usu_rol"] == "C"):?>
           <li class="nav-item">
             <a href="<?php echo BASE_URL; ?>perfil.php" class="nav-link">
@@ -42,9 +44,9 @@
             </a>
           </li>
           <?php endif; ?>
-          
-          <li class="nav-header">BÁSICAS</li>
           <?php if($_SESSION["usu_rol"] == "C" || $_SESSION["usu_rol"] == "GA"):?>
+          <li class="nav-header">BÁSICAS</li>
+          
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-th text-success"></i>
@@ -190,25 +192,32 @@
             </a>
           </li>
           <?php endif; ?>
+          
           <li class="nav-header">SOPORTE</li>
+          
           <li class="nav-item">
             <a href="<?php echo BASE_URL; ?>admTikets.php" class="nav-link">
               <i class="nav-icon fas fa-th text-light"></i>
               <p class="text">Tickets</p>
             </a>
           </li>
+          <?php if($_SESSION["usu_rol"] == "E"):?>
           <li class="nav-item">
             <a href="<?php echo BASE_URL; ?>admNuevoTikets.php" class="nav-link">
               <i class="nav-icon fas fa-plus text-light"></i>
               <p class="text">Crear Ticket</p>
             </a>
           </li>
+          <?php endif; ?>
+          <?php if($_SESSION["usu_rol"] == "C" || $_SESSION["usu_rol"] == "GA" || $_SESSION["usu_rol"] == "GI"|| $_SESSION["usu_rol"] == "E"):?>
           <li class="nav-item">
             <a href="<?php echo BASE_URL; ?>admConsultarTikets.php" class="nav-link">
               <i class="nav-icon fas fa-search text-light"></i>
               <p class="text">Consultar Ticket</p>
             </a>
           </li>
+          <?php endif; ?>
+       
           <li class="nav-header">LOGOUT</li>
           <li class="nav-item">
             <a href="<?php echo BASE_URL; ?>Logout.php" class="nav-link">

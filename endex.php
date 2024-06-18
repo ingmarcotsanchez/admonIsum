@@ -36,7 +36,7 @@
     </div>
     <div class="card-body">
       <form method="post">
-        <input type="hidden" id="usu_rol" name="usu_rol" class="form-control" value="C">
+        <input type="hidden" id="usu_rol" name="usu_rol" class="form-control" value="E">
         <?php
           if(isset($_GET["m"])){
             switch($_GET["m"]){
@@ -81,15 +81,15 @@
         </div>
       </form>
       <div class="row">
-        <div class="col-6">
-       
+        <div class="col-7">
+        
             <a href="recuperar.php" class="btn btn-sm btn-outline-success mt-2">Recuperar clave</a>
-   
+ 
         </div>
-        <div class="col-6">
+        <div class="col-5">
         
-            <a href="endex.php" class="btn btn-sm btn-success mt-2 float-right">Soy Estudiante!</a>
-        
+            <a href="index.php" class="btn btn-sm btn-success mt-2 float-right">Soy Admon!</a>
+
         </div>
       </div>
     </div>

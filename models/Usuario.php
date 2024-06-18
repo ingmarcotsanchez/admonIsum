@@ -6,16 +6,18 @@
             if(isset($_POST["enviar"])){
                 $usu_correo = $_POST["correo"];
                 $usu_pass = $_POST["passwd"];
+                $usu_rol = $_POST["usu_rol"];
 
                 if(empty($usu_correo) and empty($usu_pass)){
                     header("Location:".Conectar::ruta()."index.php?m=2");
                     exit();
                 }else{
                     
-                    $sql = "SELECT * FROM usuario WHERE usu_correo=? and usu_pass=? and est=1";
+                    $sql = "SELECT * FROM usuario WHERE usu_correo=? and usu_pass=? and usu_rol=? and est=1";
                     $stmt = $conectar->prepare($sql);
                     $stmt->bindValue(1,$usu_correo);
                     $stmt->bindValue(2,$usu_pass);
+                    $stmt->bindValue(3,$usu_rol);
                     $stmt->execute();
                     $resultado = $stmt->fetch();
                     
@@ -26,8 +28,14 @@
                         $_SESSION["usu_apem"]=$resultado["usu_apem"];
                         $_SESSION["usu_correo"]=$resultado["usu_correo"];
                         $_SESSION["usu_rol"]=$resultado["usu_rol"];
-                        header("Location:".Conectar::ruta()."views/inicio.php");
-                        exit();
+                        if($usu_rol == "C" || $usu_rol == "GA" ||$usu_rol == "GI"||$usu_rol == "AU"){
+                            header("Location:".Conectar::ruta()."views/inicio.php");
+                            exit();
+                        }else{
+                            header("Location:".Conectar::ruta()."views/admTikets.php");
+                            exit();
+                        }
+                        
                     }else{
                         header("Location:".Conectar::ruta()."index.php?m=1");
                         exit();
