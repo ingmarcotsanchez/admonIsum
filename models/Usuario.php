@@ -271,8 +271,6 @@
             return $resultado = $sql->fetchAll();
         }
 
-       
-
         public function total_profesores(){
             $conectar= parent::conexion();
             parent::set_names();
@@ -385,7 +383,66 @@
             return $resultado=$sql->fetchAll();
         }
 
-        
+        public function get_usuario_total_x_id($usu_id){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT COUNT(*) as TOTAL FROM ticket where usu_id = ?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $usu_id);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
+        public function get_usuario_totalabierto_x_id($usu_id){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT COUNT(*) as TOTAL FROM ticket where usu_id = ? and tick_estado='Abierto'";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $usu_id);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
+        public function get_usuario_totalcerrado_x_id($usu_id){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT COUNT(*) as TOTAL FROM ticket where usu_id = ? and tick_estado='Cerrado'";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $usu_id);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
+        public function get_usuario_grafico($usu_id){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT categoria.cat_nom AS nom,COUNT(*) AS total
+                FROM ticket JOIN categoria ON ticket.cat_id = categoria.cat_id  
+                WHERE ticket.est = 1 AND ticket.usu_id = ?
+                GROUP BY 
+                categoria.cat_nom 
+                ORDER BY total DESC";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $usu_id);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        } 
+
+        /* TODO: Actualizar contraseña del usuario */
+        public function update_usuario_pass($usu_id,$usu_pass){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="UPDATE usuario
+                SET
+                    usu_pass = MD5(?)
+                WHERE
+                    usu_id = ?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $usu_pass);
+            $sql->bindValue(2, $usu_id);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        } 
 
     }
 ?>

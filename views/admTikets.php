@@ -44,52 +44,39 @@ if(isset($_SESSION["usu_id"])){
         <!-- Small boxes (Stat box) -->
         <div class="row">
           
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box bg-dark">
               <div class="inner">
-                <h3 id="lbltotalProfesores"> </h3>
+                <h3 id="lbltotalTickets"> </h3>
 
-                <p>Total de Profesores</p>
+                <p>Total de Tickets</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
             </div>
           </div>
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-4 col-6">
             <!-- small box -->
-            <div class="small-box bg-info">
+            <div class="small-box bg-success">
               <div class="inner">
-                <h3 id="lbltotalProyectos"> </h3>
+                <h3 id="lbltotalTicketsAbiertos"> </h3>
 
-                <p>Total de Proyectos</p>
+                <p>Total de Abiertos</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
             </div>
           </div>
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-4 col-6">
             <!-- small box -->
-            <div class="small-box bg-primary">
+            <div class="small-box bg-danger">
               <div class="inner">
-                <h3 id="lbltotalSemilleros"> </h3>
+                <h3 id="lbltotalTicketsCerrados"> </h3>
 
-                <p>Total de Semilleros</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-light">
-              <div class="inner">
-                <h3 id="lbltotalEstudiantes"> </h3>
-
-                <p>Total de Estudiantes</p>
+                <p>Total de Cerrados</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
@@ -113,7 +100,7 @@ if(isset($_SESSION["usu_id"])){
 <?php
   include("modulos/js.php");
 ?>
-<script type="text/javascript" src="js/inicio.js"></script>
+<script type="text/javascript" src="js/admTikets.js"></script>
 <script type="text/javascript" src="js/inicio/barras.js"></script>
 
 
