@@ -1,6 +1,6 @@
 var tabla;
-//var usu_id =  $('#user_idx').val();
-//var rol_id =  $('#rol_idx').val();
+var usu_id =  $('#usu_idx').val();
+var rol_id =  $('#rol_idx').val();
 
 function init(){
     /* $("#ticket_form").on("submit",function(e){
@@ -9,7 +9,7 @@ function init(){
 }
 
 $(document).ready(function(){
-
+//console.log(usu_id);
     /* TODO: Llenar Combo Categoria 
     $.post("../../controller/categoria.php?op=combo",function(data, status){
         $('#cat_id').html(data);
@@ -24,9 +24,9 @@ $(document).ready(function(){
     /* $.post("/ISUM/controller/usuario.php?opc=combo", function (data) {
         $('#usu_asig').html(data);
     });
-
-    if (rol_id==1){ */
-        tabla=$('#ticket_data').dataTable({
+*/
+    if (rol_id=="E"){ 
+        $('#ticket_data').DataTable({
             "aProcessing": true,
             "aServerSide": true,
             dom: 'Bfrtip',
@@ -42,7 +42,7 @@ $(document).ready(function(){
                 url: '/ISUM/controller/ticket.php?opc=listar_x_usu',
                 type : "post",
                 dataType : "json",	
-                data:{ usu_id : 1 },						
+                data:{ usu_id : usu_id },						
                 error: function(e){
                     console.log(e.responseText);	
                 }
@@ -77,8 +77,8 @@ $(document).ready(function(){
                 }
             }     
         }).DataTable(); 
-    /* }else{
-        tabla=$('#ticket_data').dataTable({
+    }else{
+        $('#ticket_data').DataTable({
             "aProcessing": true,
             "aServerSide": true,
             dom: 'Bfrtip',
@@ -86,15 +86,14 @@ $(document).ready(function(){
             lengthChange: false,
             colReorder: true,
             buttons: [		          
-                    'copyHtml5',
                     'excelHtml5',
                     'csvHtml5',
-                    'pdfHtml5'
+                    'pdfHtml5',
                     ],
             "ajax":{
-                url: '../../controller/ticket.php?op=listar',
+                url: '/ISUM/controller/ticket.php?opc=listar',
                 type : "post",
-                dataType : "json",						
+                 dataType : "json",						
                 error: function(e){
                     console.log(e.responseText);	
                 }
@@ -127,14 +126,47 @@ $(document).ready(function(){
                     "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
                     "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                 }
-            }     
-        }).DataTable(); 
-    } */
+            },    
+        }); 
+    }
 
 });
 
 function ver(tick_id){
-    window.open('http://localhost/ISUM/view/DetalleTicket/?ID='+ tick_id +'');
+    console.log(tick_id);
+    window.open('detalle_tiket.php?ID='+ tick_id +'');
+}
+
+
+function CambiarEstado(tick_id){
+    swal({
+        title: "Tickets",
+        text: "Esta seguro de Reabrir el Ticket?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-warning",
+        confirmButtonText: "Si",
+        cancelButtonText: "No",
+        closeOnConfirm: false
+    },
+    function(isConfirm) {
+        if (isConfirm) {
+            $.post("/ISUM/controller/ticket.php?opc=reabrir", {tick_id : tick_id,usu_id : usu_id}, function (data) {
+
+            });
+
+  
+            $('#ticket_data').DataTable().ajax.reload();	
+
+           
+            swal({
+                title: "HelpDesk!",
+                text: "Ticket Abierto.",
+                type: "success",
+                confirmButtonClass: "btn-success"
+            });
+        }
+    });
 }
 
 /* function asignar(tick_id){
@@ -180,37 +212,7 @@ function ver(tick_id){
     });
 } */
 
-/* TODO:Reabrir ticket */
-/* function CambiarEstado(tick_id){
-    swal({
-        title: "HelpDesk",
-        text: "Esta seguro de Reabrir el Ticket?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonClass: "btn-warning",
-        confirmButtonText: "Si",
-        cancelButtonText: "No",
-        closeOnConfirm: false
-    },
-    function(isConfirm) {
-        if (isConfirm) {
-            $.post("../../controller/ticket.php?op=reabrir", {tick_id : tick_id,usu_id : usu_id}, function (data) {
 
-            });
-
-  
-            $('#ticket_data').DataTable().ajax.reload();	
-
-           
-            swal({
-                title: "HelpDesk!",
-                text: "Ticket Abierto.",
-                type: "success",
-                confirmButtonClass: "btn-success"
-            });
-        }
-    });
-} */
 
 /* TODO:Filtro avanzado 
 $(document).on("click","#btnfiltrar", function(){

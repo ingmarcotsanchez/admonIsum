@@ -48,6 +48,7 @@ if(isset($_SESSION["usu_id"])){
                                         <th>Categoría</th>
                                         <th>Título</th>
                                         <th>Fec. Creación</th>
+                                        <th>Estado</th>
                                         <th></th>
                                     </tr>
                                 </thead>

@@ -1,0 +1,145 @@
+function init(){
+ 
+}
+
+$(document).ready(function(){
+
+    var tick_id = getUrlParameter('ID');
+
+    listardetalle(tick_id);
+
+    
+
+
+    
+    $('#dtick_descrip').summernote({
+        height: 300,
+        lang: "es-ES",
+         callbacks: {
+            onImageUpload: function(image) {
+                console.log("Image detect...");
+                myimagetreat(image[0]);
+            },
+            onPaste: function (e) {
+                console.log("Text detect...");
+            }
+        }, 
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']]
+        ]
+    });
+
+    $('#tick_descrip_usu').summernote({
+        height: 200,
+        lang: "es-ES"
+    });
+    $('#tick_descrip_usu').summernote('disable');
+});
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+
+$(document).on("click","#btnEnviarTicket", function(){
+    var tick_id = getUrlParameter('ID');
+    var usu_id = $('#usu_idx').val();
+    var dtick_descrip = $('#dtick_descrip').val();
+
+    if ($('#dtick_descrip').summernote('isEmpty')){
+        Swal.fire({
+            title: 'Advertencia!',
+            text: 'Falta Descripción',
+            icon: 'warning',
+            confirmButtonText: 'Aceptar'
+        })
+    }else{
+        $.post("/ISUM/controller/ticket.php?opc=insertdetalle", { tick_id:tick_id,usu_id:usu_id,dtick_descrip:dtick_descrip}, function (data) {
+            listardetalle(tick_id);
+            $('#dtick_descrip').summernote('reset');
+            Swal.fire({
+                title: 'Correcto!',
+                text: 'Se Registro Correctamente',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            })
+        }); 
+    }
+});
+
+$(document).on("click","#btnCerrarTicket", function(){
+    Swal.fire({
+        title: "Cerrar el Ticket?",
+        text: "Esta seguro de cerrar el Ticket!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, cerrar!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var tick_id = getUrlParameter('ID');
+            var usu_id = $('#usu_idx').val();
+            $.post("/ISUM/controller/ticket.php?opc=update", { tick_id : tick_id,usu_id : usu_id }, function (data) {
+
+            }); 
+
+            /* $.post("/ISUM/controller/email.php?opc=ticket_cerrado", {tick_id : tick_id}, function (data) {
+
+            });
+
+            $.post("/ISUM/controller/whatsapp.php?opc=w_ticket_cerrado", {tick_id : tick_id}, function (data) {
+
+            }); */
+
+            listardetalle(tick_id);
+
+            Swal.fire({
+                title: "Cerrado!",
+                text: "El ticket se cerro correctamente",
+                icon: "success"
+            });
+        }
+    });
+    
+});
+
+function listardetalle(tick_id){
+    $.post("/ISUM/controller/ticket.php?opc=listardetalle", { tick_id : tick_id }, function (data) {
+        $('#Detalle_ticket').html(data);
+    });
+     
+
+    $.post("/ISUM/controller/ticket.php?opc=mostrar", { tick_id : tick_id }, function (data) {
+        data = JSON.parse(data);
+        //console.log(data.tick_estado);
+        $('#id_ticket').html(data.tick_id);
+        $('#Estado').html(data.tick_estado);
+        $('#Fecha_creacion').html(data.fech_crea);
+
+        $('#cat_nom').val(data.cat_nom);
+        $('#tick_titulo').val(data.tick_titulo);
+        $('#tick_descrip_usu').summernote ('code',data.tick_descrip);
+
+        if (data.tick_estado_texto == "Cerrado"){
+            $('#panel_detalle').hide();
+        }
+    }); 
+}
+
+init();

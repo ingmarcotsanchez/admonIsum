@@ -38,13 +38,19 @@ $(document).ready(function(){
 function guardaryeditar(e){
     e.preventDefault();
     var formData = new FormData($("#ticket_form")[0]);
-    /* if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val()==''|| $('#cats_id').val() == 0 || $('#cat_id').val() == 0 || $('#prio_id').val() == 0){
-        swal("Advertencia!", "Campos Vacios", "warning");
+    if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val()=='' || $('#cat_id').val() == 0){
+     //if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val()==''|| $('#cats_id').val() == 0 || $('#cat_id').val() == 0 || $('#prio_id').val() == 0){
+        Swal.fire({
+            title: 'Advertencia!',
+            text: 'Falta Descripción',
+            icon: 'warning',
+            confirmButtonText: 'Aceptar'
+        })
     }else{
-        var totalfiles = $('#fileElem').val().length;
+        /* var totalfiles = $('#fileElem').val().length;
         for (var i = 0; i < totalfiles; i++) {
             formData.append("files[]", $('#fileElem')[0].files[i]);
-        } */
+        }  */
         $.ajax({
             url: "/ISUM/controller/ticket.php?opc=insert",
             type: "POST",
@@ -85,7 +91,7 @@ function guardaryeditar(e){
                 swal("Correcto!", "Registrado Correctamente", "success");
             } */
         }); 
-    /* } */
+    }
 }
 
 init();

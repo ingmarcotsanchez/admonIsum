@@ -85,9 +85,7 @@ if(isset($_SESSION["usu_id"])){
     </div>
     <!-- /.Site warapper -->
     <?php include("modulos/js.php"); ?>
-    <script>
-  
-</script>
+    
     <script type="text/javascript" src="js/admNuevoTiket.js"></script>
 </body>
 </html>
