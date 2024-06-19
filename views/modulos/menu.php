@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="<?php echo BASE_URL; ?>principal.php" class="brand-link">
+    <a href="<?php echo BASE_URL; ?>inicio.php" class="brand-link">
       <img src="../html/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-dark">ADMON-ISUM</span>
     </a>
@@ -8,13 +8,13 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="info">
+   
+       
           <input type="hidden" id="usu_idx" value="<?php echo $_SESSION["usu_id"] ?>">
           <input type="hidden" id="rol_idx" value="<?php echo $_SESSION["usu_rol"] ?>">
-          <span class="text-muted"><?php echo $_SESSION["usu_nom"]." ".$_SESSION["usu_apep"]." ".$_SESSION["usu_apem"];?></span>
-        </div>
-      </div>
+          
+        
+
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
