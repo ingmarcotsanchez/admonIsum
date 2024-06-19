@@ -3,9 +3,9 @@ var usu_id =  $('#usu_idx').val();
 var rol_id =  $('#rol_idx').val();
 
 function init(){
-    /* $("#ticket_form").on("submit",function(e){
+    $("#ticket_form").on("submit",function(e){
         guardar(e);	
-    }); */
+    });
 }
 
 $(document).ready(function(){
@@ -21,10 +21,9 @@ $(document).ready(function(){
     });*/
 
     /* TODO:LLenar Combo usuario asignar */
-    /* $.post("/ISUM/controller/usuario.php?opc=combo", function (data) {
+    $.post("/ISUM/controller/usuario.php?opc=combo", function (data) {
         $('#usu_asig').html(data);
     });
-*/
     if (rol_id=="E"){ 
         $('#ticket_data').DataTable({
             "aProcessing": true,
@@ -169,22 +168,22 @@ function CambiarEstado(tick_id){
     });
 }
 
-/* function asignar(tick_id){
-    $.post("../../controller/ticket.php?op=mostrar", {tick_id : tick_id}, function (data) {
+function asignar(tick_id){
+    $.post("/ISUM/controller/ticket.php?opc=mostrar", {tick_id : tick_id}, function (data) {
         data = JSON.parse(data);
         $('#tick_id').val(data.tick_id);
 
         $('#mdltitulo').html('Asignar Agente');
         $("#modalasignar").modal('show');
     });
-} */
+}
 
 /* TODO: Guardar asignacion de usuario de soporte */
-/* function guardar(e){
+function guardar(e){
     e.preventDefault();
 	var formData = new FormData($("#ticket_form")[0]);
     $.ajax({
-        url: "../../controller/ticket.php?op=asignar",
+        url: "/ISUM/controller/ticket.php?opc=asignar",
         type: "POST",
         data: formData,
         contentType: false,
@@ -192,17 +191,22 @@ function CambiarEstado(tick_id){
         success: function(datos){
             var tick_id = $('#tick_id').val();
             
-            $.post("../../controller/email.php?op=ticket_asignado", {tick_id : tick_id}, function (data) {
+            /* $.post("/ISUM/controller/email.php?opc=ticket_asignado", {tick_id : tick_id}, function (data) {
 
             });
 
            
-            $.post("../../controller/whatsapp.php?op=w_ticket_asignado", {tick_id : tick_id}, function (data) {
+            $.post("/ISUM/controller/whatsapp.php?opc=w_ticket_asignado", {tick_id : tick_id}, function (data) {
 
-            });
+            }); */
 
          
-            swal("Correcto!", "Asignado Correctamente", "success");
+            Swal.fire({
+                title: 'Correcto!',
+                text: 'Se Asigno correctamente el usuario de soporte',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            })
 
      
             $("#modalasignar").modal('hide');
@@ -210,7 +214,7 @@ function CambiarEstado(tick_id){
             $('#ticket_data').DataTable().ajax.reload();
         }
     });
-} */
+}
 
 
 

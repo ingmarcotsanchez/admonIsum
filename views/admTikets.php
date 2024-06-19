@@ -47,9 +47,9 @@ if(isset($_SESSION["usu_id"])){
           
           <div class="col-lg-4 col-6">
             <!-- small box -->
-            <div class="small-box bg-dark">
+            <div class="small-box bg-light">
               <div class="inner">
-                <h3 id="lbltotalTickets"> </h3>
+                <h3 id="lbltotalTickets" class="text-primary"> </h3>
 
                 <p>Total de Tickets</p>
               </div>
@@ -60,9 +60,9 @@ if(isset($_SESSION["usu_id"])){
           </div>
           <div class="col-lg-4 col-6">
             <!-- small box -->
-            <div class="small-box bg-success">
+            <div class="small-box bg-light">
               <div class="inner">
-                <h3 id="lbltotalTicketsAbiertos"> </h3>
+                <h3 id="lbltotalTicketsAbiertos" class="text-primary"> </h3>
 
                 <p>Total de Abiertos</p>
               </div>
@@ -73,9 +73,9 @@ if(isset($_SESSION["usu_id"])){
           </div>
           <div class="col-lg-4 col-6">
             <!-- small box -->
-            <div class="small-box bg-danger">
+            <div class="small-box bg-light">
               <div class="inner">
-                <h3 id="lbltotalTicketsCerrados"> </h3>
+                <h3 id="lbltotalTicketsCerrados" class="text-primary"> </h3>
 
                 <p>Total de Cerrados</p>
               </div>

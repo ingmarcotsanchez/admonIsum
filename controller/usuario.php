@@ -7,10 +7,10 @@
         case "guardaryeditar":
             if(empty($_POST["usu_id"])){
                // $PasswordHash = password_hash($_POST["usu_pass"], PASSWORD_BCRYPT);
-                $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_correo"],$P_POST["usu_pass"],$_POST["usu_rol"]);
+                $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["usu_rol"]);
             }else{
                 //$PasswordHash = password_hash($_POST["usu_pass"], PASSWORD_BCRYPT);
-                $usuario->update_usuario($_POST["usu_id"],$_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$P_POST["usu_pass"],$_POST["usu_rol"]);
+                $usuario->update_usuario($_POST["usu_id"],$_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_pass"],$_POST["usu_rol"]);
             }
             break;
         case "crear":
@@ -108,8 +108,6 @@
             }
             break;
 
-    
-
         case "total_Productos_satsoc":
             $datos=$usuario->total_productos_satsoc();
             if(is_array($datos)==true and count($datos)>0){
@@ -120,6 +118,7 @@
                 echo json_encode($output);
             }
             break;
+
         case "total_Productos_tecnoreciclaje":
             $datos=$usuario->total_productos_tecnoreciclaje();
             if(is_array($datos)==true and count($datos)>0){
@@ -130,6 +129,7 @@
                 echo json_encode($output);
             }
             break;
+
         case "total_Productos_bigdata":
             $datos=$usuario->total_productos_bigdata();
             if(is_array($datos)==true and count($datos)>0){
@@ -140,6 +140,7 @@
                 echo json_encode($output);
             }
             break;
+
         case "total_estudiantes":
             $datos=$usuario->total_estudiantes();
             if(is_array($datos)==true and count($datos)>0){
@@ -150,6 +151,7 @@
                 echo json_encode($output);
             }
             break;
+
         case "total_activos":
             $datos=$usuario->total_activos();
             if(is_array($datos)==true and count($datos)>0){
@@ -160,6 +162,7 @@
                 echo json_encode($output);
             }
             break;
+
         case "total_ausentes":
             $datos=$usuario->total_ausentes();
             if(is_array($datos)==true and count($datos)>0){
@@ -170,6 +173,7 @@
                 echo json_encode($output);
             }
             break;
+
         case "total_desertores":
             $datos=$usuario->total_desertores();
             if(is_array($datos)==true and count($datos)>0){
@@ -180,6 +184,7 @@
                 echo json_encode($output);
             }
             break;
+
         case "total_egresados":
             $datos=$usuario->total_egresados();
             if(is_array($datos)==true and count($datos)>0){
@@ -190,6 +195,7 @@
                 echo json_encode($output);
             }
             break;
+
         case "total_NoGraduados":
             $datos=$usuario->total_NoGraduados();
             if(is_array($datos)==true and count($datos)>0){
@@ -200,6 +206,7 @@
                 echo json_encode($output);
             }
             break;
+
         case "total";
             $datos=$usuario->get_usuario_total_x_id($_POST["usu_id"]);  
             if(is_array($datos)==true and count($datos)>0){
@@ -238,6 +245,19 @@
             echo json_encode($datos);
             break;
 
+        case "combo";
+            $datos = $usuario->usuario_x_rol();
+            if(is_array($datos)==true and count($datos)>0){
+                $html.= "<option label='Seleccionar'></option>";
+                foreach($datos as $row)
+                {
+                   
+                    $html.= "<option value='".$row['usu_id']."'>".$row['usu_nom']." ".$row['usu_apep']." - ".$row['usu_rol']."</option>";
+                }
+                echo $html;
+            }
+            break;
+        
         /* case "password":
             $usuario->update_usuario_pass($_POST["usu_id"],$_POST["usu_pass"]);
             break; */

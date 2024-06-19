@@ -2,13 +2,15 @@
     require_once("../config/conexion.php");
     require_once("../models/Ticket.php");
     $ticket = new Ticket();
-    //require_once("../models/Usuario.php");
-    //$usuario = new Usuario();
+    require_once("../models/Usuario.php");
+    $usuario = new Usuario();
     /* require_once("../models/Documento.php");
     $documento = new Documento();
  */
     switch($_GET["opc"]){
-        
+        case "asignar":
+            $ticket->update_ticket_asignacion($_POST["tick_id"],$_POST["usu_asig"]);
+            break;
         case "insert":
             $ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["tick_titulo"],$_POST["tick_descrip"]);//,$_POST["prio_id"]);
             /* $datos=$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["cats_id"],$_POST["tick_titulo"],$_POST["tick_descrip"]);//,$_POST["prio_id"]);
@@ -55,27 +57,29 @@
                 if ($row["tick_estado"]=="Abierto"){
                     $sub_array[] = '<span class="bnt btn-success btn-sm">Abierto</span>';
                 }else{
-                    $sub_array[] = '<a onClick="CambiarEstado('.$row["tick_id"].')"><span class="btn btn-danger btn-sm">Cerrado</span></a>';
+                    $sub_array[] = '<a class="btn btn-md btn-danger" onClick="CambiarEstado('.$row["tick_id"].')">Cerrado</a>';
                 }
-                /*
-                if($row["fech_asig"]==null){
-                    $sub_array[] = '<span class="label label-pill label-default">Sin Asignar</span>';
+                
+                if($row["fech_asig"]==NULL){
+                    $sub_array[] = '<span class="bnt btn-secondary btn-sm">Sin Asignar</span>';
                 }else{
                     $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_asig"]));
                 }
+                /*
                 if($row["fech_cierre"]==null){
                     $sub_array[] = '<span class="label label-pill label-default">Sin Cerrar</span>';
                 }else{
                     $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
-                }
-                if($row["usu_asig"]==null){
-                    $sub_array[] = '<a onClick="asignar('.$row["tick_id"].');"><span class="label label-pill label-warning">Sin Asignar</span></a>';
-                }else{
-                    $datos1=$usuario->get_usuario_x_id($row["usu_asig"]);
-                    foreach($datos1 as $row1){
-                        $sub_array[] = '<span class="label label-pill label-success">'. $row1["usu_nom"].'</span>';
-                    }
                 } */
+                if($row["usu_asig"]==null){
+                    $sub_array[] = '<span class="bnt btn-warning btn-sm">Sin Asignar</span>';
+                    /* $sub_array[] = '<a onClick="asignar('.$row["tick_id"].');"><span class="bnt btn-warning btn-sm">Sin Asignar</span></a>'; */
+                }else{
+                    $datos1=$usuario->usuario_id($row["usu_asig"]);
+                    foreach($datos1 as $row1){
+                        $sub_array[] = '<span class="bnt btn-warning btn-sm">'. $row1["usu_nom"].'</span>';
+                    }
+                }
                 $sub_array[] = '<button type="button" onClick="ver('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>';
                 $data[] = $sub_array;
             }
@@ -134,9 +138,21 @@
                 if ($row["tick_estado"]=="Abierto"){
                     $sub_array[] = '<span class="btn btn-success btn-sm">Abierto</span>';
                 }else{
-                    $sub_array[] = '<a onClick="CambiarEstado('.$row["tick_id"].')"><span class="btn btn-danger">Cerrado</span></a>';
+                    $sub_array[] = '<a class="btn btn-sm btn-danger" onClick="CambiarEstado('.$row["tick_id"].')">Cerrado</a>';
                 }
-                
+                if($row["fech_asig"]==NULL){
+                    $sub_array[] = '<span class="bnt btn-secondary btn-sm">Sin Asignar</span>';
+                }else{
+                    $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_asig"]));
+                }
+                if($row["usu_asig"]==null){
+                    $sub_array[] = '<a style="cursor:pointer;" class="bnt btn-warning btn-sm" onClick="asignar('.$row["tick_id"].');">Sin Asignar</a>';
+                }else{
+                    $datos1=$usuario->usuario_id($row["usu_asig"]);
+                    foreach($datos1 as $row1){
+                        $sub_array[] = '<span class="bnt btn-info btn-sm">'. $row1["usu_nom"].'</span>';
+                    }
+                }
                 $sub_array[] = '<button type="button" onClick="ver('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>';
                 $data[] = $sub_array;
             }
@@ -234,9 +250,7 @@
             break;
         
       
-        case "asignar":
-            $ticket->update_ticket_asignacion($_POST["tick_id"],$_POST["usu_asig"]);
-            break;
+        
 
 
         case "listar_x_usu":

@@ -254,7 +254,7 @@
         public function listar(){
             $conectar = parent::Conexion();
             parent::set_names();
-            $sql = "SELECT * FROM usuario WHERE est = 1";
+            $sql = "call sp_listar()";
             $sql=$conectar->prepare($sql);
             //$sql->bindValue(1,$usu_id);
             $sql->execute();
@@ -269,6 +269,15 @@
             $sql->bindValue(1,$usu_id);
             $sql->execute();
             return $resultado = $sql->fetchAll();
+        }
+
+        public function usuario_x_rol(){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="SELECT * FROM usuario where est=1 and usu_rol='GI' OR usu_rol='GA' OR usu_rol='AU' OR usu_rol='C' ";
+            $sql=$conectar->prepare($sql);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
         }
 
         public function total_profesores(){

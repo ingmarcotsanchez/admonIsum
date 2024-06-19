@@ -49,6 +49,8 @@ if(isset($_SESSION["usu_id"])){
                                         <th>Título</th>
                                         <th>Fec. Creación</th>
                                         <th>Estado</th>
+                                        <th>Fec. Asignado</th>
+                                        <th>Usuario</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -67,6 +69,7 @@ if(isset($_SESSION["usu_id"])){
         ?>
     </div>
     <!-- /.Site warapper -->
+    <?php require_once("admConsultarModalTikets.php"); ?>
     <?php include("modulos/js.php"); ?>
     <script type="text/javascript" src="js/admConsultarTiket.js"></script>
 </body>

@@ -59,10 +59,9 @@
                 ticket.tick_descrip,
                 ticket.fech_crea,
                 ticket.tick_estado,
-                /*
                 ticket.fech_cierre,
                 ticket.usu_asig,
-                ticket.fech_asig, */
+                ticket.fech_asig,
                 usuario.usu_id,
                 usuario.usu_nom,
                 usuario.usu_apep,
@@ -94,9 +93,9 @@
                 ticket.tick_descrip,
                 ticket.tick_estado,
                 ticket.fech_crea,
-                /* ticket.fech_cierre,
+                ticket.fech_cierre,
                 ticket.usu_asig,
-                ticket.fech_asig, */
+                ticket.fech_asig,
                 usuario.usu_nom,
                 usuario.usu_apep,
                 usuario.usu_apem,
@@ -232,10 +231,10 @@
             return $resultado=$sql->fetchAll();
         } */
 
-       /*  public function update_ticket_asignacion($tick_id,$usu_asig){
+         public function update_ticket_asignacion($tick_id,$usu_asig){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="update tm_ticket 
+            $sql="update ticket 
                 set	
                     usu_asig = ?,
                     fech_asig = now()
@@ -246,14 +245,14 @@
             $sql->bindValue(2, $tick_id);
             $sql->execute();
 
-            $sql1="INSERT INTO tm_notificacion (not_id,usu_id,not_mensaje,tick_id,est) VALUES (null,?,'Se le ha asignado el ticket Nro : ',?,2)";
+            /* $sql1="INSERT INTO tm_notificacion (not_id,usu_id,not_mensaje,tick_id,est) VALUES (null,?,'Se le ha asignado el ticket Nro : ',?,2)";
             $sql1=$conectar->prepare($sql1);
             $sql1->bindValue(1, $usu_asig);
             $sql1->bindValue(2, $tick_id);
-            $sql1->execute();
+            $sql1->execute(); */
 
             return $resultado=$sql->fetchAll();
-        } */
+        } 
 
         public function get_ticket_total(){
             $conectar= parent::conexion();
