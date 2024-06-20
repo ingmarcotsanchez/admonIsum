@@ -47,10 +47,10 @@ function guardaryeditar(e){
             confirmButtonText: 'Aceptar'
         })
     }else{
-        /* var totalfiles = $('#fileElem').val().length;
+        var totalfiles = $('#fileElem').val().length;
         for (var i = 0; i < totalfiles; i++) {
             formData.append("files[]", $('#fileElem')[0].files[i]);
-        }  */
+        }
         $.ajax({
             url: "/ISUM/controller/ticket.php?opc=insert",
             type: "POST",

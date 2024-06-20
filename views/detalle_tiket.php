@@ -59,6 +59,24 @@ if(isset($_SESSION["usu_id"])){
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-lg-12">
+                                    <fieldset class="form-group">
+                                        <label class="form-label semibold" for="tick_titulo">Documentos Adjuntos</label>
+                                        <table id="documentos_data" class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 90%;">Nombre</th>
+                                                <th class="text-center" style="width: 10%;"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-12">
                                     <textarea id="tick_descrip_usu" name="tick_descrip_usu"readonly>
                                     

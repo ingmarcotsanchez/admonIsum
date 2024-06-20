@@ -13,7 +13,7 @@
                     exit();
                 }else{
                     
-                    $sql = "SELECT * FROM usuario WHERE usu_correo=? and usu_pass=? and usu_rol=? and est=1";
+                    $sql = "SELECT * FROM usuario WHERE usu_correo=? and usu_pass=MD5(?) and usu_rol=? and est=1";
                     $stmt = $conectar->prepare($sql);
                     $stmt->bindValue(1,$usu_correo);
                     $stmt->bindValue(2,$usu_pass);
@@ -189,7 +189,7 @@
 
             $conectar = parent::Conexion();
             parent::set_names();
-            $sql="INSERT INTO usuario (usu_id, usu_nom, usu_apep, usu_apem, usu_correo, usu_pass, usu_rol, fech_crea, est) VALUES (NULL,?,?,?,?,?,?,now(),'1');";
+            $sql="INSERT INTO usuario (usu_id, usu_nom, usu_apep, usu_apem, usu_correo, usu_pass, usu_rol, fech_crea, est) VALUES (NULL,?,?,?,?,MD5(?)//,?,now(),'1');";
      
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $usu_nom);
@@ -225,7 +225,7 @@
                     usu_nom = ?,
                     usu_apep = ?,
                     usu_apem = ?,
-                    usu_pass = ?,
+                    usu_pass = MD5(?),
                     usu_rol = ?,
                     fech_mod = now()
                 WHERE

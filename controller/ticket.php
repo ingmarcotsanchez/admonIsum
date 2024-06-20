@@ -4,16 +4,16 @@
     $ticket = new Ticket();
     require_once("../models/Usuario.php");
     $usuario = new Usuario();
-    /* require_once("../models/Documento.php");
+    require_once("../models/Documento.php");
     $documento = new Documento();
- */
+ 
     switch($_GET["opc"]){
         case "asignar":
             $ticket->update_ticket_asignacion($_POST["tick_id"],$_POST["usu_asig"]);
             break;
         case "insert":
-            $ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["tick_titulo"],$_POST["tick_descrip"]);//,$_POST["prio_id"]);
-            /* $datos=$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["cats_id"],$_POST["tick_titulo"],$_POST["tick_descrip"]);//,$_POST["prio_id"]);
+            //$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["tick_titulo"],$_POST["tick_descrip"]);//,$_POST["prio_id"]);
+            $datos=$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],/* $_POST["cats_id"], */$_POST["tick_titulo"],$_POST["tick_descrip"]);//,$_POST["prio_id"]);
             if (is_array($datos)==true and count($datos)>0){
                 foreach ($datos as $row){
                     $output["tick_id"] = $row["tick_id"];
@@ -21,7 +21,7 @@
 
                     }else{
                         $countfiles = count($_FILES['files']['name']);
-                        $ruta = "../public/document/".$output["tick_id"]."/";
+                        $ruta = "../document/ticket/".$output["tick_id"]."/";
                         $files_arr = array();
 
                         if (!file_exists($ruta)) {
@@ -37,7 +37,7 @@
                     }
                 }
             }
-            echo json_encode($datos); */
+            echo json_encode($datos);
             break;
         case "insertdetalle":
             $ticket->insert_ticketdetalle($_POST["tick_id"],$_POST["usu_id"],$_POST["dtick_descrip"]);

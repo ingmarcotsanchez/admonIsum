@@ -44,8 +44,13 @@ if(isset($_SESSION["usu_id"])){
                             <input type="hidden" id="usu_id" name="usu_id" value="<?php echo $_SESSION["usu_id"] ?>">
                             <div class="card-body">
                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="tick_titulo">Título</label>
+                                            <input type="text" class="form-control" id="tick_titulo" name="tick_titulo" placeholder="titulo">
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
-                                    
                                         <div class="form-group">
                                             <label>Categoría</label>
                                             <select class="form-control select2" style="width:100%" name="cat_id" id="cat_id" data-placeholder="Seleccione">
@@ -57,8 +62,8 @@ if(isset($_SESSION["usu_id"])){
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="tick_titulo">Título</label>
-                                            <input type="text" class="form-control" id="tick_titulo" name="tick_titulo" placeholder=".form-control-border">
+                                            <label for="fileElem">Documento de Soporte</label>
+                                            <input type="file" class="form-control" id="fileElem" name="fileElem" multiple>
                                         </div>
                                     </div>
                                 </div>
