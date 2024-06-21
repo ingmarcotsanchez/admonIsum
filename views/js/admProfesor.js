@@ -12,6 +12,10 @@ function guardaryeditar(e){
     e.preventDefault();
     var formData = new FormData($("#profesor_form")[0]);
     console.log(formData);
+    var totalfiles = $('#fileElem').val().length;
+        for (var i = 0; i < totalfiles; i++) {
+            formData.append("files[]", $('#fileElem')[0].files[i]);
+        }
     $.ajax({
         url: "/ISUM/controller/profesor.php?opc=guardaryeditar",
         type: "POST",

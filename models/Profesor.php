@@ -29,8 +29,11 @@
             $sql->bindValue(18, $prof_est);
            // $sql->bindValue(18, $prof_cv);
             $sql->execute();
-
-            return $resultado = $sql->fetchAll();
+            $sql1="SELECT last_insert_id() as 'prof_id';";
+            $sql1=$conectar->prepare($sql1);
+            $sql1->execute();
+            return $resultado=$sql1->fetchAll(pdo::FETCH_ASSOC);
+            //return $resultado = $sql->fetchAll();
         }
 
         public function update_profesor($prof_id,$prof_image,$prof_dni,$prof_nom,$prof_apep,$prof_apem,$prof_correo,$prof_correo2,$prof_niv,$prof_sex,$prof_telf,$rol_id,$esc_id,$prof_fecini,$prof_fecfin,$prof_cvlac,$prof_orcid,$prof_google,$prof_est){

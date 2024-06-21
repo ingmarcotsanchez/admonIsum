@@ -147,6 +147,12 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="fileElem">Documento de Soporte</label>
+                                <input type="file" class="form-control" id="fileElem" name="fileElem" multiple>
+                            </div>
+                        </div>
                     </div>    
                 </div>
                 <div class="modal-footer justify-content-between">

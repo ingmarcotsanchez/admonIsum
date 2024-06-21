@@ -3,6 +3,8 @@
     require_once("../models/Profesor.php");
     $profesor = new Profesor();
     //$prof = $profesor->get_profesorDetallexid($_GET['prof_id']);
+    require_once("../models/Cv.php");
+    $cv = new Cv();
 
     switch($_GET["opc"]){
         case "guardaryeditar":
@@ -29,30 +31,40 @@
                         }
                         if($_FILES["prof_image"]["type"] == "image/png"){
                             $aleatorio = mt_rand(100,999);
-                            //$ruta = __DIR__."/../views/images/profesor/".$_POST["prof_apep"].$_POST["prof_apem"]."/".$aleatorio.".jpg";
                             $ruta ="/images/profesor/".$_POST["prof_apep"].$_POST["prof_apem"]."/".$aleatorio.".jpg";
-                            //$ruta = "images/profesor/".$_POST["prof_apep"]."/".$aleatorio.".png";
                             $origen = imagecreatefrompng($_FILES["prof_image"]["tmp_name"]);
                             $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                             imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
                             imagepng($destino, $r.$ruta);
                         }
                     }
-                    //if(isset($_FILES['prof_cv']) && $_FILES['prof_cv']['type']=='application/pdf'){
-                    //   $cv=move_uploaded_file ($_FILES['prof_cv']['tmp_name'] , $ruta.$_FILES['documento']['name']);
-                    //}
-                    //$verificar->verificarProfesor($_POST["prof_dni"]);
-                    //var_dump($verificar);
-                    //if(empty($verificar > 0)){
-                        $profesor->insert_profesor($ruta,$_POST["prof_dni"],$_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],date('Y-m-d',strtotime($_POST["prof_fecini"])),date('Y-m-d',strtotime($_POST["prof_fecfin"])),$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"]);//,$cv);
-                    //}else{
-                    //    $respuesta = array('msg'=>'Error el profesor ya existe','icono'=>'warning');
-                    //}
                     
+                    $datos=$profesor->insert_profesor($ruta,$_POST["prof_dni"],$_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],date('Y-m-d',strtotime($_POST["prof_fecini"])),date('Y-m-d',strtotime($_POST["prof_fecfin"])),$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"]);
+                    if (is_array($datos)==true and count($datos)>0){
+                        foreach ($datos as $row){
+                            $output["prof_id"] = $row["prof_id"];
+                            if (empty($_FILES['files']['name'])){
+        
+                            }else{
+                                $countfiles = count($_FILES['files']['name']);
+                                $ruta = "../document/cv/".$output["prof_id"]."/";
+                                $files_arr = array();
+        
+                                if (!file_exists($ruta)) {
+                                    mkdir($ruta, 0777, true);
+                                }
+        
+                                for ($index = 0; $index < $countfiles; $index++) {
+                                    $doc1 = $_FILES['files']['tmp_name'][$index];
+                                    $destino = $ruta.$_FILES['files']['name'][$index];
+                                    $cv->insert_cv( $output["prof_id"],$_FILES['files']['name'][$index]);
+                                    move_uploaded_file($doc1,$destino);
+                                }
+                            }
+                        }
+                    }
+                    echo json_encode($datos);
                 }else{
-                    //if(empty($_POST["prof_fecfin"])) {
-                    //$_POST["prof_fecfin"] = null;
-                    //$ruta = __DIR__."images/profesor/default/anonymous.png";
                     $r=__DIR__."/..";
                     if(isset($_FILES["prof_image"]["tmp_name"])){
                         list($ancho, $alto) = getimagesize($_FILES["prof_image"]["tmp_name"]);
@@ -67,10 +79,6 @@
                         if($_FILES["prof_image"]["type"] == "image/jpeg"){
                             $aleatorio = mt_rand(100,999);
                             $ruta = "/images/profesor/".$_POST["prof_apep"].$_POST["prof_apem"]."/".$aleatorio.".jpg";
-                            //var_dump($ruta);
-                            //var_dump($r);
-                            
-                           // die();
                             $origen = imagecreatefromjpeg($_FILES["prof_image"]["tmp_name"]);						
                             $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                             imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
@@ -78,7 +86,6 @@
                         }
                         if($_FILES["prof_image"]["type"] == "image/png"){
                             $aleatorio = mt_rand(100,999);
-                            //$ruta = __DIR__."/../views/images/profesor/".$_POST["prof_apep"]."/".$aleatorio.".png";
                             $ruta = "/images/profesor/".$_POST["prof_apep"].$_POST["prof_apem"]."/".$aleatorio.".jpg";
                             $origen = imagecreatefrompng($_FILES["prof_image"]["tmp_name"]);
                             $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
@@ -87,7 +94,6 @@
                         }
                         if($_FILES["prof_image"]["type"] == "image/jpg"){
                             $aleatorio = mt_rand(100,999);
-                            //$ruta = __DIR__."/../views/images/profesor/".$_POST["prof_apep"]."/".$aleatorio.".png";
                             $ruta = "/images/profesor/".$_POST["prof_apep"].$_POST["prof_apem"]."/".$aleatorio.".jpg";
                             $origen = imagecreatefrompng($_FILES["prof_image"]["tmp_name"]);
                             $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
@@ -96,9 +102,34 @@
                         }
                        
                     }
-                   
                     $profesor->update_profesor($_POST["prof_id"], $ruta, $_POST["prof_dni"], $_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],date('Y-m-d',strtotime($_POST["prof_fecini"])),date('Y-m-d',strtotime($_POST["prof_fecfin"])),$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"]);
-                   // }
+                    
+                    //$profesor->update_profesor($_POST["prof_id"], $ruta, $_POST["prof_dni"], $_POST["prof_nom"],$_POST["prof_apep"],$_POST["prof_apem"],$_POST["prof_correo"],$_POST["prof_correo2"],$_POST["prof_niv"],$_POST["prof_sex"],$_POST["prof_telf"],$_POST["rol_id"],$_POST["esc_id"],date('Y-m-d',strtotime($_POST["prof_fecini"])),date('Y-m-d',strtotime($_POST["prof_fecfin"])),$_POST["prof_cvlac"],$_POST["prof_orcid"],$_POST["prof_google"],$_POST["prof_est"]);
+                    //if (is_array($datos)==true and count($datos)>0){
+                        ///foreach ($datos as $row){
+                            //$output["prof_id"] = $row["prof_id"];
+                            if (empty($_FILES['files']['name'])){
+        
+                            }else{
+                                $countfiles = count($_FILES['files']['name']);
+                                $ruta = "../document/cv/".$_POST["prof_id"]."/";
+                                //$files_arr = array();
+        
+                                if (!file_exists($ruta)) {
+                                    mkdir($ruta, 0777, true);
+                                }
+        
+                                for ($index = 0; $index < $countfiles; $index++) {
+                                    $doc1 = $_FILES['files']['tmp_name'][$index];
+                                    $destino = $ruta.$_FILES['files']['name'][$index];
+                                    $cv->insert_cv( $_POST["prof_id"],$_FILES['files']['name'][$index]);
+                                    move_uploaded_file($doc1,$destino);
+                                }
+                            }
+                        //}
+                    //}
+                    //echo json_encode($datos);
+                
                 }
                 break;
         case "mostrar":

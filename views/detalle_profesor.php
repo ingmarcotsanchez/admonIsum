@@ -3,9 +3,15 @@ define( "BASE_URL", "/ISUM/views/");
 define("BASE_PATH","/ISUM");
 /* Llamamos al archivo de conexion.php */
 require_once("../config/conexion.php");
+
 require_once("../models/Profesor.php");
     $profesor = new Profesor();
     $prof = $profesor->get_profesorDetallexid($_GET['prof_id']);
+
+require_once("../models/Cv.php");
+    $hoja = new Cv();
+    $cv = $hoja->get_cv_x_profesor($_GET['prof_id']);
+    
 require_once("../models/Producto_profesor.php");
     $profesor2 = new Producto_profesor();
     $totponext = $profesor2->total_ponencias_ext($_GET['prof_id']);
@@ -305,7 +311,37 @@ if(isset($_SESSION["usu_id"])){
                                             </div>
                                         </div>
                                     </div>
-                                                        
+                                    <div class="card">
+                                        <div class="row p-2">  
+                                            <div class="col-lg-12">
+                                                <fieldset class="form-group">
+                                                    <label class="form-label semibold" for="tick_titulo">Hoja de Vida</label>
+                                                    <table id="cv_data" class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                                                        <thead>
+                                                        <tr>
+                                                            <th style="width: 90%;">Nombre</th>
+                                                            <th class="text-center" style="width: 10%;"></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <?php for($i=0;$i<sizeof($prof);$i++): ?>
+                                                            <?php if($cv[$i]["prof_id"] == $prof[$i]["prof_id"]): ?> 
+                                                           <td>
+                                                            <a href='../document/cv/<?php echo $cv[$i]["prof_id"];?>/<?php echo $cv[$i]["cv_nom"];?>'target="_blank"><?php echo $cv[$i]["cv_nom"];?></a>
+                                                           </td>
+                                                           <td>
+                                                            <a href='../document/cv/<?php echo $cv[$i]["prof_id"];?>/<?php echo $cv[$i]["cv_nom"];?>'target="_blank" class="btn btn-inline btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                                                           </td>
+                                                           <?php else: ?>
+                                                            <td>No hay archivos</td>
+                                                            <?php endif; ?>
+                                                        <?php endfor; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -322,7 +358,7 @@ if(isset($_SESSION["usu_id"])){
     <?php
     include("modulos/js.php");
     ?>
-    <script type="text/javascript" src="js/perfil.js"></script>
+    <script type="text/javascript" src="js/admDtllProfesor.js"></script>
 </body>
 </html>
 <?php
