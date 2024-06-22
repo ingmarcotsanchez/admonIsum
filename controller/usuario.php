@@ -6,10 +6,8 @@
     switch($_GET["opc"]){
         case "guardaryeditar":
             if(empty($_POST["usu_id"])){
-               // $PasswordHash = password_hash($_POST["usu_pass"], PASSWORD_BCRYPT);
                 $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["usu_rol"]);
             }else{
-                //$PasswordHash = password_hash($_POST["usu_pass"], PASSWORD_BCRYPT);
                 $usuario->update_usuario($_POST["usu_id"],$_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_pass"],$_POST["usu_rol"]);
             }
             break;
@@ -258,9 +256,7 @@
             }
             break;
         
-        /* case "password":
-            $usuario->update_usuario_pass($_POST["usu_id"],$_POST["usu_pass"]);
-            break; */
+        
        
     }
 ?>

@@ -15,8 +15,46 @@ $(document).ready(function(){
 });
 
 $(document).on("click","#btnactualizar", function(){
-
-    $.post("/ISUM/controller/usuario.php?opc=editPerfil", { 
+    var pass = $("#txtpass").val();
+    var newpass = $("#txtpassnew").val();
+    if (pass.length == 0 || newpass.length == 0) {
+        //location.reload();
+        Swal.fire({
+            title: 'Error!',
+            text: 'Las contraseñas no puede ir vacia',
+            icon: 'warning',
+            confirmButtonText: 'Aceptar'
+        })
+        
+        
+    } else{
+        if (pass==newpass){
+            var usu_id = $('#usu_idx').val();
+            $.post("/ISUM/controller/usuario.php?opc=editPerfil", {usu_id:usu_id,usu_pass:newpass}, function (data) {
+                Swal.fire({
+                    title: 'Correcto!',
+                    text: 'Se actualizo Correctamente',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                })
+                
+            });
+        }else{
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Las contraseñas no coinciden",
+                showConfirmButton: false,
+                timer: 2500
+                /* title: 'Error!',
+                text: 'Las contraseñas no coinciden',
+                icon: 'error',
+                confirmButtonText: 'Aceptar' */
+            })
+            location.reset();
+        }
+    }
+    /* $.post("/ISUM/controller/usuario.php?opc=editPerfil", { 
         //info_id : info_id,
         usu_nom : $('#usu_nom').val(),
         usu_apep : $('#usu_apep').val(),
@@ -31,7 +69,7 @@ $(document).on("click","#btnactualizar", function(){
         text: 'Se actualizo Correctamente',
         icon: 'success',
         confirmButtonText: 'Aceptar'
-    })
+    }) */
 
 
 });

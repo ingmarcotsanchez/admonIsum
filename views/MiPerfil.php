@@ -62,21 +62,13 @@ if(isset($_SESSION["usu_id"])){
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="usu_correo">Correo Electrónico</label>
                                         <input type="email" class="form-control" name="usu_correo" id="usu_correo" placeholder="Ingrese su email" disabled>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="usu_pass">Contraseña</label>
-                                        <input type="text" class="form-control" name="usu_pass" id="usu_pass" placeholder="Ingrese su apellido">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="usu_rol">Rol</label>
                                         <select class="form-control select2" name="usu_rol" id="usu_rol" data-placeholder="Seleccione" disabled>
@@ -85,13 +77,35 @@ if(isset($_SESSION["usu_id"])){
                                             <option value="GA">Gestor Académico o Docente de Apoyo</option>
                                             <option value="GI">Gestor de Investigación</option>
                                             <option value="AU">Gestor Autoevaluación</option>
+                                            <option value="E">Estudiante</option>
                                         </select>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="usu_pass">Contraseña Actual</label>
+                                        <input type="text" class="form-control" name="usu_pass" id="usu_pass" placeholder="Ingrese su email" disabled>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="usu_pass">Nueva Contraseña</label>
+                                        <input type="password" class="form-control" id="txtpass" name="txtpass" placeholder="Ingrese su nueva contraseña">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="usu_pass">Confirmar Contraseña</label>
+                                        <input type="password" class="form-control" id="txtpassnew" name="txtpassnew" placeholder="Ingrese su nueva contraseña">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-outline-secondary" id="btnactualizar">Modificar</button>
+                            <button type="button" class="btn btn-outline-secondary" id="btnactualizar">Cambiar Contraseña</button>
                             </div>
                         <!-- /.card-body -->
                         </div>

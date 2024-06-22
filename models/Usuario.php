@@ -48,7 +48,6 @@
             $conectar = parent::Conexion();
             parent::set_names();
             
-
             if(isset($_POST["enviar"])){
                 $usu_correo = $_POST["correo"];
                 
@@ -208,7 +207,7 @@
             parent::set_names();
             $sql = "UPDATE usuario 
                     SET 
-                    usu_clave = ?
+                    usu_pass = MD5(?)
                     WHERE usu_id = ?";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1,$usu_pass);
@@ -436,22 +435,6 @@
             $sql->execute();
             return $resultado=$sql->fetchAll();
         } 
-
-        /* TODO: Actualizar contraseña del usuario */
-        /* public function update_usuario_pass($usu_id,$usu_pass){
-            $conectar= parent::conexion();
-            parent::set_names();
-            $sql="UPDATE usuario
-                SET
-                    usu_pass = MD5(?)
-                WHERE
-                    usu_id = ?";
-            $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $usu_pass);
-            $sql->bindValue(2, $usu_id);
-            $sql->execute();
-            return $resultado=$sql->fetchAll();
-        }  */
 
     }
 ?>
