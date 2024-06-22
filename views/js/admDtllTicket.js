@@ -146,10 +146,10 @@ $(document).on("click","#btnCerrarTicket", function(){
 
             }); 
 
-            /* $.post("/ISUM/controller/email.php?opc=ticket_cerrado", {tick_id : tick_id}, function (data) {
+             $.post("/ISUM/controller/email.php?opc=ticket_cerrado", {tick_id : tick_id}, function (data) {
 
             });
-
+/*
             $.post("/ISUM/controller/whatsapp.php?opc=w_ticket_cerrado", {tick_id : tick_id}, function (data) {
 
             }); */

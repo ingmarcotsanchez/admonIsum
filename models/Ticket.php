@@ -70,6 +70,7 @@
                 usuario.usu_nom,
                 usuario.usu_apep,
                 usuario.usu_apem,
+                usuario.usu_correo,
                 categoria.cat_id,
                 categoria.cat_nom
                 FROM 

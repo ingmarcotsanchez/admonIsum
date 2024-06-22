@@ -59,10 +59,15 @@ function guardaryeditar(e){
             processData: false,
             
             success: function(data){  
-                console.log(data);
-
+                //console.log(data);
+                data = JSON.parse(data);
+                console.log(data[0].tick_id);
                 $('#tick_titulo').val('');
                 $('#tick_descrip').summernote('reset');
+
+                $.post("/ISUM/controller/email.php?opc=ticket_abierto", {tick_id : data[0].tick_id}, function (data) {
+
+                });
                 
                 Swal.fire({
                     title: 'Correcto!',
@@ -71,13 +76,10 @@ function guardaryeditar(e){
                     confirmButtonText: 'Aceptar'
                 })
             }
-                /* data = JSON.parse(data);
-                console.log(data[0].tick_id);
+                /* 
 
               
-                $.post("../../controller/email.php?op=ticket_abierto", {tick_id : data[0].tick_id}, function (data) {
-
-                });
+                
 
                
                 $.post("../../controller/whatsapp.php?op=w_ticket_abierto", {tick_id : data[0].tick_id}, function (data) {

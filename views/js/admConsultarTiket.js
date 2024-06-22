@@ -191,11 +191,11 @@ function guardar(e){
         success: function(datos){
             var tick_id = $('#tick_id').val();
             
-            /* $.post("/ISUM/controller/email.php?opc=ticket_asignado", {tick_id : tick_id}, function (data) {
+             $.post("/ISUM/controller/email.php?opc=ticket_asignado", {tick_id : tick_id}, function (data) {
 
             });
 
-           
+           /*
             $.post("/ISUM/controller/whatsapp.php?opc=w_ticket_asignado", {tick_id : tick_id}, function (data) {
 
             }); */
@@ -203,7 +203,7 @@ function guardar(e){
          
             Swal.fire({
                 title: 'Correcto!',
-                text: 'Se Asigno correctamente el usuario de soporte',
+                text: 'Se Asigno correctamente al usuario de soporte',
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
             })
