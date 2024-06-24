@@ -33,12 +33,21 @@ $(document).ready(function(){
         $('#cat_id').html(data);
     });
 
+    $("#cat_id").change(function(){
+        cat_id = $(this).val();
+        /* TODO: llenar Combo subcategoria segun cat_id */
+        $.post("/ISUM/controller/subcategoria.php?opc=combo",{cat_id : cat_id},function(data, status){
+            console.log(data);
+            $('#cats_id').html(data);
+        });
+    });
+
 });
 
 function guardaryeditar(e){
     e.preventDefault();
     var formData = new FormData($("#ticket_form")[0]);
-    if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val()=='' || $('#cat_id').val() == 0){
+    if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val()=='' || $('#cat_id').val() == 0 || $('#cats_id').val() == 0){
      //if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val()==''|| $('#cats_id').val() == 0 || $('#cat_id').val() == 0 || $('#prio_id').val() == 0){
         Swal.fire({
             title: 'Advertencia!',

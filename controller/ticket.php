@@ -13,7 +13,7 @@
             break;
         case "insert":
             //$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["tick_titulo"],$_POST["tick_descrip"]);//,$_POST["prio_id"]);
-            $datos=$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],/* $_POST["cats_id"], */$_POST["tick_titulo"],$_POST["tick_descrip"]);//,$_POST["prio_id"]);
+            $datos=$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["cats_id"], $_POST["tick_titulo"],$_POST["tick_descrip"]);//,$_POST["prio_id"]);
             if (is_array($datos)==true and count($datos)>0){
                 foreach ($datos as $row){
                     $output["tick_id"] = $row["tick_id"];
@@ -57,7 +57,7 @@
                 if ($row["tick_estado"]=="Abierto"){
                     $sub_array[] = '<span class="bnt btn-success btn-sm">Abierto</span>';
                 }else{
-                    $sub_array[] = '<a class="btn btn-md btn-danger" onClick="CambiarEstado('.$row["tick_id"].')">Cerrado</a>';
+                    $sub_array[] = '<a class="btn btn-sm btn-danger" onClick="CambiarEstado('.$row["tick_id"].')">Cerrado</a>';
                 }
                 
                 if($row["fech_asig"]==NULL){
@@ -67,7 +67,7 @@
                 }
                 /*
                 if($row["fech_cierre"]==null){
-                    $sub_array[] = '<span class="label label-pill label-default">Sin Cerrar</span>';
+                    $sub_array[] = '<span class="bnt btn-dark btn-sm">Sin Cerrar</span>';
                 }else{
                     $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
                 } */
@@ -117,8 +117,8 @@
                     $output["usu_apep"] = $row["usu_apep"];
                     $output["usu_apem"] = $row["usu_apem"];
                     $output["cat_nom"] = $row["cat_nom"];
-                    /* $output["cats_nom"] = $row["cats_nom"];
-                    $output["tick_estre"] = $row["tick_estre"];
+                    $output["cats_nom"] = $row["cats_nom"];
+                    /*$output["tick_estre"] = $row["tick_estre"];
                     $output["tick_coment"] = $row["tick_coment"];
                     $output["prio_nom"] = $row["prio_nom"]; */
                 }
@@ -138,7 +138,7 @@
                 if ($row["tick_estado"]=="Abierto"){
                     $sub_array[] = '<span class="btn btn-success btn-sm">Abierto</span>';
                 }else{
-                    $sub_array[] = '<a class="btn btn-sm btn-danger" onClick="CambiarEstado('.$row["tick_id"].')">Cerrado</a>';
+                    $sub_array[] = '<span class="btn btn-danger btn-sm" onClick="CambiarEstado('.$row["tick_id"].')">Cerrado</span>';
                 }
                 if($row["fech_asig"]==NULL){
                     $sub_array[] = '<span class="bnt btn-secondary btn-sm">Sin Asignar</span>';
@@ -241,8 +241,6 @@
             $datos=$ticket->get_ticket_grafico();  
             echo json_encode($datos);
             break;
-        /* 
-
        
         case "reabrir":
             $ticket->reabrir_ticket($_POST["tick_id"]);
@@ -252,7 +250,7 @@
       
         
 
-
+ /* 
         case "listar_x_usu":
             $datos=$ticket->listar_ticket_x_usu($_POST["usu_id"]);
             $data= Array();

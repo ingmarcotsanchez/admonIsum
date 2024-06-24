@@ -174,12 +174,13 @@ function listardetalle(tick_id){
 
     $.post("/ISUM/controller/ticket.php?opc=mostrar", { tick_id : tick_id }, function (data) {
         data = JSON.parse(data);
-        //console.log(data.tick_estado);
+        //console.log(data);
         $('#id_ticket').html(data.tick_id);
         $('#Estado').html(data.tick_estado);
         $('#Fecha_creacion').html(data.fech_crea);
 
         $('#cat_nom').val(data.cat_nom);
+        $('#cats_nom').val(data.cats_nom);
         $('#tick_titulo').val(data.tick_titulo);
         $('#tick_descrip_usu').summernote ('code',data.tick_descrip);
 

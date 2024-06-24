@@ -138,34 +138,29 @@ function ver(tick_id){
 
 
 function CambiarEstado(tick_id){
-    swal({
+    Swal.fire({
         title: "Tickets",
         text: "Esta seguro de Reabrir el Ticket?",
-        type: "warning",
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonClass: "btn-warning",
-        confirmButtonText: "Si",
-        cancelButtonText: "No",
-        closeOnConfirm: false
-    },
-    function(isConfirm) {
-        if (isConfirm) {
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, Abrir!"
+      }).then((result) => {
+        if (result.isConfirmed) {
             $.post("/ISUM/controller/ticket.php?opc=reabrir", {tick_id : tick_id,usu_id : usu_id}, function (data) {
 
             });
 
   
             $('#ticket_data').DataTable().ajax.reload();	
-
-           
-            swal({
-                title: "HelpDesk!",
-                text: "Ticket Abierto.",
-                type: "success",
-                confirmButtonClass: "btn-success"
-            });
+          Swal.fire({
+            title: "HelpDesk!",
+            text: "Ticket Abierto.",
+            icon: "success"
+          });
         }
-    });
+      });
 }
 
 function asignar(tick_id){

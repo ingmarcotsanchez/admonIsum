@@ -1,17 +1,18 @@
 <?php
     class Ticket extends Conectar{
 
-        public function insert_ticket($usu_id, $cat_id, $tick_titulo, $tick_descrip ){
+        public function insert_ticket($usu_id, $cat_id, $cats_id,$tick_titulo, $tick_descrip ){
             $conectar= parent::conexion();
             parent::set_names();
             
-            $sql="INSERT INTO ticket (tick_id, usu_id, cat_id, tick_titulo, tick_descrip, tick_estado, fech_crea, est) VALUES (NULL, ?, ?, ?, ?, 'Abierto', now(), 1)";
+            $sql="INSERT INTO ticket (tick_id, usu_id, cat_id, cats_id, tick_titulo, tick_descrip, tick_estado, fech_crea, est) VALUES (NULL, ?, ?, ?, ?, ?, 'Abierto', now(), 1)";
                     
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $usu_id);
             $sql->bindValue(2, $cat_id);
-            $sql->bindValue(3, $tick_titulo);
-            $sql->bindValue(4, $tick_descrip);
+            $sql->bindValue(3, $cats_id);
+            $sql->bindValue(4, $tick_titulo);
+            $sql->bindValue(5, $tick_descrip);
             $sql->execute();
             $sql1="SELECT last_insert_id() as 'tick_id';";
             $sql1=$conectar->prepare($sql1);
@@ -127,7 +128,7 @@
                 ticket.tick_id,
                 ticket.usu_id,
                 ticket.cat_id,
-                /* ticket.cats_id, */
+                ticket.cats_id,
                 ticket.tick_titulo,
                 ticket.tick_descrip,
                 ticket.tick_estado,
@@ -140,14 +141,14 @@
                 usuario.usu_apem,
                 usuario.usu_correo,
                 /* usuario.usu_telf, */
-                categoria.cat_nom
-                /* subcategoria.cats_nom,
-                ticket.prio_id,
+                categoria.cat_nom,
+                subcategoria.cats_nom
+                /*ticket.prio_id,
                 prioridad.prio_nom */
                 FROM 
                 ticket
                 INNER join categoria on ticket.cat_id = categoria.cat_id
-                /* INNER join subcategoria on ticket.cats_id = subcategoria.cats_id */
+                INNER join subcategoria on ticket.cats_id = subcategoria.cats_id
                 INNER join usuario on ticket.usu_id = usuario.usu_id
                 /* INNER join prioridad on ticket.prio_id = prioridad.prio_id */
                 WHERE
@@ -206,11 +207,11 @@
         } 
 
         /* TODO: Insertar linea adicional al reabrir el ticket */
-      /*    public function insert_ticketdetalle_reabrir($tick_id,$usu_id){
+        public function insert_ticketdetalle_reabrir($tick_id,$usu_id){
             $conectar= parent::conexion();
             parent::set_names();
-                $sql="	INSERT INTO td_ticketdetalle 
-                    (tickd_id,tick_id,usu_id,tickd_descrip,fech_crea,est) 
+                $sql="	INSERT INTO detalle_ticket 
+                    (dtick_id,tick_id,usu_id,dtick_descrip,fech_crea,est) 
                     VALUES 
                     (NULL,?,?,'Ticket Re-Abierto...',now(),'1');";
             $sql=$conectar->prepare($sql);
@@ -218,14 +219,14 @@
             $sql->bindValue(2, $usu_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
-        } */
+        }
 
 
         /* TODO:Cambiar estado del ticket al reabrir */
-       /*   public function reabrir_ticket($tick_id){
+        public function reabrir_ticket($tick_id){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="update tm_ticket 
+            $sql="update ticket 
                 set	
                     tick_estado = 'Abierto'
                 where
@@ -234,7 +235,7 @@
             $sql->bindValue(1, $tick_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
-        } */
+        }
 
          public function update_ticket_asignacion($tick_id,$usu_asig){
             $conectar= parent::conexion();

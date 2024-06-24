@@ -52,6 +52,13 @@ if(isset($_SESSION["usu_id"])){
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+                                
+                                    <div class="form-group">
+                                        <label>Sub Categoría</label>
+                                        <input type="text" class="form-control" id="cats_nom" name="cats_nom" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="tick_titulo">Título</label>
                                         <input type="text" class="form-control" id="tick_titulo" name="tick_titulo" readonly>
