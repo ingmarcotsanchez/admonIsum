@@ -133,14 +133,13 @@
                 ticket.tick_descrip,
                 ticket.tick_estado,
                 ticket.fech_crea,
-                /* ticket.fech_cierre,
+                ticket.fech_cierre,
                 ticket.tick_estre,
-                ticket.tick_coment, */
+                ticket.tick_coment,
                 usuario.usu_nom,
                 usuario.usu_apep,
                 usuario.usu_apem,
                 usuario.usu_correo,
-                /* usuario.usu_telf, */
                 categoria.cat_nom,
                 subcategoria.cats_nom
                 /*ticket.prio_id,
