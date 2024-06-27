@@ -19,7 +19,7 @@ function listardetalle(tick_id){
     $.post("/ISUM/controller/ticket.php?opc=mostrar", { tick_id : tick_id }, function (data) {
         data = JSON.parse(data);
         $('#lblestado').val(data.tick_estado_texto);
-        $('#lblnomusuario').val(data.usu_nom +' '+data.usu_apep);
+        $('#lblnomusuario').val(data.usu_nom +' '+data.usu_apep+' '+data.usu_apem);
         $('#lblfechcrea').val(data.fech_crea);
         $('#lblnomidticket').val(data.tick_id);
         $('#cat_nom').val(data.cat_nom);

@@ -136,6 +136,11 @@ function ver(tick_id){
     window.open('detalle_tiket.php?ID='+ tick_id +'');
 }
 
+function evaluar(tick_id){
+    console.log(tick_id);
+    window.open('admEncuestas.php?ID='+ tick_id +'');
+}
+
 
 function CambiarEstado(tick_id){
     Swal.fire({

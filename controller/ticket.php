@@ -81,6 +81,11 @@
                     }
                 }
                 $sub_array[] = '<button type="button" onClick="ver('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>';
+                if($row["tick_estado"]=="Cerrado"){
+                    $sub_array[] = '<button type="button" onClick="evaluar('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-outline-primary btn-sm ladda-button"><i class="fa fa-key"></i></button>';
+                }else{
+                    $sub_array[] = '<button disabled type="button" onClick="evaluar('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-outline-primary btn-sm ladda-button"><i class="fa fa-key"></i></button>'; 
+                }
                 $data[] = $sub_array;
             }
 
@@ -112,7 +117,7 @@
                     $output["tick_estado_texto"] = $row["tick_estado"];
 
                     $output["fech_crea"] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
-                    //$output["fech_cierre"] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
+                    $output["fech_cierre"] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
                     $output["usu_nom"] = $row["usu_nom"];
                     $output["usu_apep"] = $row["usu_apep"];
                     $output["usu_apem"] = $row["usu_apem"];
@@ -154,6 +159,9 @@
                     }
                 }
                 $sub_array[] = '<button type="button" onClick="ver('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>';
+                
+                $sub_array[] = '<button disabled type="button" onClick="evaluar('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-outline-primary btn-sm ladda-button"><i class="fa fa-key"></i></button>';
+                
                 $data[] = $sub_array;
             }
 
@@ -245,6 +253,9 @@
         case "reabrir":
             $ticket->reabrir_ticket($_POST["tick_id"]);
             $ticket->insert_ticketdetalle_reabrir($_POST["tick_id"],$_POST["usu_id"]);
+            break;
+        case "encuesta":
+            $ticket->insert_encuesta($_POST["tick_id"],$_POST["tick_estre"],$_POST["tick_coment"]);
             break;
         
       
@@ -357,9 +368,7 @@
         
 
        
-        case "encuesta":
-            $ticket->insert_encuesta($_POST["tick_id"],$_POST["tick_estre"],$_POST["tick_coment"]);
-            break;
+        
 
  */    }
 ?>

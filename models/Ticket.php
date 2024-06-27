@@ -14,7 +14,7 @@
             $sql->bindValue(4, $tick_titulo);
             $sql->bindValue(5, $tick_descrip);
             $sql->execute();
-            $sql1="SELECT last_insert_id() as 'tick_id';";
+            $sql1="SELECT last_insert_id() AS 'tick_id';";
             $sql1=$conectar->prepare($sql1);
             $sql1->execute();
             return $resultado=$sql1->fetchAll(pdo::FETCH_ASSOC);
@@ -76,9 +76,9 @@
                 categoria.cat_nom
                 FROM 
                 ticket
-                INNER join categoria on ticket.cat_id = categoria.cat_id
-                INNER join usuario on ticket.usu_id = usuario.usu_id
-                /* INNER join tm_prioridad on tm_ticket.prio_id = tm_prioridad.prio_id */
+                INNER JOIN categoria ON ticket.cat_id = categoria.cat_id
+                INNER JOIN usuario ON ticket.usu_id = usuario.usu_id
+                /* INNER join prioridad on tm_ticket.prio_id = tm_prioridad.prio_id */
                 WHERE
                 ticket.est = 1
                 AND usuario.usu_id=?";
@@ -110,9 +110,9 @@
                 prioridad.prio_nom */
                 FROM 
                 ticket
-                INNER join categoria on ticket.cat_id = categoria.cat_id
-                INNER join usuario on ticket.usu_id = usuario.usu_id
-                /* INNER join tm_prioridad on tm_ticket.prio_id = tm_prioridad.prio_id */
+                INNER JOIN categoria ON ticket.cat_id = categoria.cat_id
+                INNER JOIN usuario ON ticket.usu_id = usuario.usu_id
+                /* INNER join prioridad on tm_ticket.prio_id = tm_prioridad.prio_id */
                 WHERE
                 ticket.est = 1
                 ";
@@ -146,9 +146,9 @@
                 prioridad.prio_nom */
                 FROM 
                 ticket
-                INNER join categoria on ticket.cat_id = categoria.cat_id
-                INNER join subcategoria on ticket.cats_id = subcategoria.cats_id
-                INNER join usuario on ticket.usu_id = usuario.usu_id
+                INNER JOIN categoria ON ticket.cat_id = categoria.cat_id
+                INNER JOIN subcategoria ON ticket.cats_id = subcategoria.cats_id
+                INNER JOIN usuario ON ticket.usu_id = usuario.usu_id
                 /* INNER join prioridad on ticket.prio_id = prioridad.prio_id */
                 WHERE
                 ticket.est = 1
@@ -170,9 +170,8 @@
                 usuario.usu_apep,
                 usuario.usu_apem,
                 usuario.usu_rol
-                FROM 
-                detalle_ticket
-                INNER join usuario on detalle_ticket.usu_id = usuario.usu_id
+                FROM detalle_ticket
+                INNER JOIN usuario ON detalle_ticket.usu_id = usuario.usu_id
                 WHERE 
                 tick_id =?";
             $sql=$conectar->prepare($sql);
@@ -184,7 +183,7 @@
         public function insert_ticketdetalle($tick_id,$usu_id,$dtick_descrip){
             $conectar= parent::conexion();
             parent::set_names();
-                $sql="INSERT INTO detalle_ticket (dtick_id,tick_id,usu_id,dtick_descrip,fech_crea,est) VALUES (NULL,?,?,?,now(),'1');";
+            $sql="INSERT INTO detalle_ticket (dtick_id,tick_id,usu_id,dtick_descrip,fech_crea,est) VALUES (NULL,?,?,?,now(),'1');";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $tick_id);
             $sql->bindValue(2, $usu_id);
@@ -196,7 +195,7 @@
         public function insert_ticketdetalle_cerrar($tick_id,$usu_id){
             $conectar= parent::conexion();
             parent::set_names();
-                //$sql="call sp_i_ticketdetalle_01(?,?)";
+            //$sql="call sp_i_ticketdetalle_01(?,?)";
             $sql="INSERT INTO detalle_ticket (dtick_id,tick_id,usu_id,dtick_descrip,fech_crea,est) VALUES (NULL,?,?,'Ticket Cerrado',now(),'1');";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $tick_id);
@@ -209,10 +208,7 @@
         public function insert_ticketdetalle_reabrir($tick_id,$usu_id){
             $conectar= parent::conexion();
             parent::set_names();
-                $sql="	INSERT INTO detalle_ticket 
-                    (dtick_id,tick_id,usu_id,dtick_descrip,fech_crea,est) 
-                    VALUES 
-                    (NULL,?,?,'Ticket Re-Abierto...',now(),'1');";
+            $sql="INSERT INTO detalle_ticket (dtick_id,tick_id,usu_id,dtick_descrip,fech_crea,est) VALUES (NULL,?,?,'Ticket Re-Abierto...',now(),'1');";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $tick_id);
             $sql->bindValue(2, $usu_id);
@@ -225,10 +221,10 @@
         public function reabrir_ticket($tick_id){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="update ticket 
-                set	
+            $sql="UPDATE ticket 
+                SET	
                     tick_estado = 'Abierto'
-                where
+                WHERE
                     tick_id = ?";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $tick_id);
@@ -239,11 +235,11 @@
          public function update_ticket_asignacion($tick_id,$usu_asig){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="update ticket 
-                set	
+            $sql="UPDATE ticket 
+                SET	
                     usu_asig = ?,
                     fech_asig = now()
-                where
+                WHERE
                     tick_id = ?";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $usu_asig);
@@ -262,7 +258,7 @@
         public function get_ticket_total(){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT COUNT(*) as TOTAL FROM ticket";
+            $sql="SELECT COUNT(*) AS TOTAL FROM ticket";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();
@@ -271,7 +267,7 @@
         public function get_ticket_totalabierto(){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT COUNT(*) as TOTAL FROM ticket where tick_estado='Abierto'";
+            $sql="SELECT COUNT(*) AS TOTAL FROM ticket WHERE tick_estado='Abierto'";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();
@@ -280,7 +276,7 @@
         public function get_ticket_totalcerrado(){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT COUNT(*) as TOTAL FROM ticket where tick_estado='Cerrado'";
+            $sql="SELECT COUNT(*) AS TOTAL FROM ticket WHERE tick_estado='Cerrado'";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();
@@ -301,22 +297,22 @@
         }
 
         /* TODO: Actualizar valor de estrellas de encuesta */
-         /* public function insert_encuesta($tick_id,$tick_estre,$tick_comment){
+        public function insert_encuesta($tick_id,$tick_estre,$tick_coment){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="update tm_ticket 
-                set	
+            $sql="UPDATE ticket 
+                SET	
                     tick_estre = ?,
                     tick_coment = ?
-                where
+                WHERE
                     tick_id = ?";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $tick_estre);
-            $sql->bindValue(2, $tick_comment);
+            $sql->bindValue(2, $tick_coment);
             $sql->bindValue(3, $tick_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
-        } */
+        }
 
         /* TODO: Filtro Avanzado de ticket */
         /* public function filtrar_ticket($tick_titulo,$cat_id,$prio_id){

@@ -150,10 +150,10 @@ if(isset($_SESSION["usu_id"])){
     --> 
    <script src="../html/plugins/rating/js/star-rating.min.js"></script>
     <script>
-    /* $('#tick_estre').rating({ 
+    $('#tick_estre').rating({ 
         showCaption: false
-    }); */
-    $("#tick_estre").rating();
+    });
+    /* $("#tick_estre").rating(); */
 </script>
 <script type="text/javascript" src="js/admEncuesta.js"></script>
 </body>
