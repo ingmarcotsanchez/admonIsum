@@ -192,12 +192,10 @@
             </a>
           </li>
           <?php endif; ?>
-          
           <li class="nav-header">SOPORTE</li>
-          
           <li class="nav-item">
             <a href="<?php echo BASE_URL; ?>admTikets.php" class="nav-link">
-              <i class="nav-icon fas fa-th text-light"></i>
+              <i class="nav-icon fas fa-tachometer-alt text-light"></i>
               <p class="text">Tickets</p>
             </a>
           </li>
@@ -207,6 +205,37 @@
               <i class="nav-icon fas fa-plus text-light"></i>
               <p class="text">Crear Ticket</p>
             </a>
+          </li>
+          <?php endif; ?>
+          <?php if($_SESSION["usu_rol"] == "C"):?>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Administración
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo BASE_URL; ?>admPrioridad.php" class="nav-link">
+                  <i class="nav-icon fas fa-search text-light"></i>
+                  <p class="text">Prioridades</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo BASE_URL; ?>admCategorias.php" class="nav-link">
+                  <i class="nav-icon fas fa-search text-light"></i>
+                  <p class="text">Categorias</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo BASE_URL; ?>admSubcategorias.php" class="nav-link">
+                  <i class="nav-icon fas fa-search text-light"></i>
+                  <p class="text">Sub Categorias</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <?php endif; ?>
           <?php if($_SESSION["usu_rol"] == "C" || $_SESSION["usu_rol"] == "GA" || $_SESSION["usu_rol"] == "GI"|| $_SESSION["usu_rol"] == "E"):?>
