@@ -181,6 +181,7 @@ function listardetalle(tick_id){
 
         $('#cat_nom').val(data.cat_nom);
         $('#cats_nom').val(data.cats_nom);
+        $('#prio_nom').val(data.prio_nom);
         $('#tick_titulo').val(data.tick_titulo);
         $('#tick_descrip_usu').summernote ('code',data.tick_descrip);
 

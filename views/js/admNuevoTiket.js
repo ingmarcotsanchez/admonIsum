@@ -42,12 +42,16 @@ $(document).ready(function(){
         });
     });
 
+    $.post("/ISUM/controller/prioridad.php?opc=combo",function(data, status){
+        $('#prio_id').html(data);
+    });
+
 });
 
 function guardaryeditar(e){
     e.preventDefault();
     var formData = new FormData($("#ticket_form")[0]);
-    if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val()=='' || $('#cat_id').val() == 0 || $('#cats_id').val() == 0){
+    if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val()=='' || $('#cat_id').val() == 0 || $('#cats_id').val() == 0 || $('#prio_id').val() == 0){
      //if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val()==''|| $('#cats_id').val() == 0 || $('#cat_id').val() == 0 || $('#prio_id').val() == 0){
         Swal.fire({
             title: 'Advertencia!',

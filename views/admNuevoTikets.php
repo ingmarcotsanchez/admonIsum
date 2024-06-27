@@ -76,6 +76,16 @@ if(isset($_SESSION["usu_id"])){
                                             <input type="file" class="form-control" id="fileElem" name="fileElem" multiple>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Prioridad</label>
+                                            <select class="form-control select2" style="width:100%" name="prio_id" id="prio_id" data-placeholder="Seleccione">
+                                
+                                                <option label="Seleccione"></option>
+
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12">

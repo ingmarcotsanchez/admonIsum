@@ -18,15 +18,17 @@ function listardetalle(tick_id){
     /* TODO: Mostra detalle de ticket */
     $.post("/ISUM/controller/ticket.php?opc=mostrar", { tick_id : tick_id }, function (data) {
         data = JSON.parse(data);
+        console.log(data);
         $('#lblestado').val(data.tick_estado_texto);
         $('#lblnomusuario').val(data.usu_nom +' '+data.usu_apep+' '+data.usu_apem);
         $('#lblfechcrea').val(data.fech_crea);
         $('#lblnomidticket').val(data.tick_id);
         $('#cat_nom').val(data.cat_nom);
         $('#cats_nom').val(data.cats_nom);
-        $('#tick_titulo').val(data.tick_titulo);
-        /* $('#prio_nom').val(data.prio_nom); */
         $('#lblfechcierre').val(data.fech_cierre);
+        $('#tick_titulo').val(data.tick_titulo);
+        $('#prio_nom').val(data.prio_nom);
+        
 
         if (data.tick_estado_texto=='Abierto') {
             window.open('http://localhost/ISUM/','_self');

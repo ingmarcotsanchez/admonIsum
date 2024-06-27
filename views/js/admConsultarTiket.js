@@ -15,10 +15,10 @@ $(document).ready(function(){
         $('#cat_id').html(data);
     });*/
 
-    /* TODO: llenar Combo Prioridad 
-    $.post("../../controller/prioridad.php?op=combo",function(data, status){
+    /* TODO: llenar Combo Prioridad */
+    $.post("/ISUM/controller/prioridad.php?opc=combo",function(data, status){
         $('#prio_id').html(data);
-    });*/
+    });
 
     /* TODO:LLenar Combo usuario asignar */
     $.post("/ISUM/controller/usuario.php?opc=combo", function (data) {

@@ -44,15 +44,18 @@ if(isset($_SESSION["usu_id"])){
                             <table id="ticket_data" class="table display responsive wrap">
                                 <thead>
                                     <tr>
-                                        <th style="width: 5%;">#</th>
+                                        <th style="width: 3%;">#</th>
                                         <th style="width: 10%;">Categoría</th>
                                         <th style="width: 25%;">Título</th>
                                         <th style="width: 15%;">Fec. Creación</th>
+                                        <th style="width: 10%;">Prioridad</th>
                                         <th style="width: 5%;">Estado</th>
                                         <th style="width: 15%;">Fec. Asignado</th>
+                                        <th style="width: 15%;">Fec. Cierre</th>
                                         <th style="width: 15%;">Usuario</th>
-                                        <th style="width: 5%;">Detalle</th>
-                                        <th style="width: 5%;">Encuesta</th>
+                                        
+                                        <th style="width: 3%;">Detalle</th>
+                                        <th style="width: 3%;">Encuesta</th>
                                     </tr>
                                 </thead>
                                 <tbody>
