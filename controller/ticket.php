@@ -124,7 +124,11 @@
                     $output["tick_estado_texto"] = $row["tick_estado"];
 
                     $output["fech_crea"] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
-                    $output["fech_cierre"] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
+                    if ($row["fech_cierre"]==NULL){
+                        $output["fech_cierre"] = "Sin cerrar";
+                    }else{
+                        $output["fech_cierre"] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
+                    }
                     $output["usu_nom"] = $row["usu_nom"];
                     $output["usu_apep"] = $row["usu_apep"];
                     $output["usu_apem"] = $row["usu_apem"];
