@@ -1,6 +1,6 @@
 <?php
     class Ticket extends Conectar{
-        //insert
+         //metodos de inserción - insert
 
         public function insert_ticket($usu_id, $cat_id, $cats_id,$tick_titulo, $tick_descrip, $prio_id ){
             $conectar= parent::conexion();
@@ -32,7 +32,12 @@
             $sql->bindValue(2, $usu_id);
             $sql->bindValue(3, $dtick_descrip);
             $sql->execute();
-            return $resultado=$sql->fetchAll();
+
+            $sql1="SELECT last_insert_id() AS 'dtick_id';";
+            $sql1=$conectar->prepare($sql1);
+            $sql1->execute();
+            return $resultado=$sql1->fetchAll(pdo::FETCH_ASSOC);
+            //return $resultado=$sql->fetchAll();
         }
 
         public function insert_ticketdetalle_cerrar($tick_id,$usu_id){
@@ -59,7 +64,7 @@
             return $resultado=$sql->fetchAll();
         }
 
-        //update
+        //metodos de modificación - update
 
         public function update_ticket($tick_id){
             $conectar= parent::conexion();

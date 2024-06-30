@@ -116,7 +116,37 @@ $(document).on("click","#btnEnviarTicket", function(){
             confirmButtonText: 'Aceptar'
         })
     }else{
-        $.post("/ISUM/controller/ticket.php?opc=insertdetalle", { tick_id:tick_id,usu_id:usu_id,dtick_descrip:dtick_descrip}, function (data) {
+        var formData = new FormData();
+        formData.append('tick_id',tick_id);
+        formData.append('usu_id',usu_id);
+        formData.append('dtick_descrip',dtick_descrip);
+        var totalfiles = $('#fileElem').val().length;
+        for (var i = 0; i < totalfiles; i++) {
+            formData.append("files[]", $('#fileElem')[0].files[i]);
+        }
+        $.ajax({
+            url: "/ISUM/controller/ticket.php?opc=insertdetalle",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            
+            success: function(data){  
+                //console.log(data);
+                data = JSON.parse(data);
+                console.log(data[0].tick_id);
+                listardetalle(tick_id);
+                $('#fileElem').val('');
+                $('#dtick_descrip').summernote('reset');
+                Swal.fire({
+                    title: 'Correcto!',
+                    text: 'Se Registro Correctamente',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                })
+            }
+        });
+        /* $.post("/ISUM/controller/ticket.php?opc=insertdetalle", { tick_id:tick_id,usu_id:usu_id,dtick_descrip:dtick_descrip}, function (data) {
             listardetalle(tick_id);
             $('#dtick_descrip').summernote('reset');
             Swal.fire({
@@ -125,7 +155,7 @@ $(document).on("click","#btnEnviarTicket", function(){
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
             })
-        }); 
+        });  */
     }
 });
 

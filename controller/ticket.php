@@ -40,7 +40,31 @@
             echo json_encode($datos);
             break;
         case "insertdetalle":
-            $ticket->insert_ticketdetalle($_POST["tick_id"],$_POST["usu_id"],$_POST["dtick_descrip"]);
+            $datos=$ticket->insert_ticketdetalle($_POST["tick_id"],$_POST["usu_id"],$_POST["dtick_descrip"]);
+            if (is_array($datos)==true and count($datos)>0){
+                foreach ($datos as $row){
+                    $output["dtick_id"] = $row["dtick_id"];
+                    if (empty($_FILES['files']['name'])){
+
+                    }else{
+                        $countfiles = count($_FILES['files']['name']);
+                        $ruta = "../document/ticket_detalle/".$output["dtick_id"]."/";
+                        $files_arr = array();
+
+                        if (!file_exists($ruta)) {
+                            mkdir($ruta, 0777, true);
+                        }
+
+                        for ($index = 0; $index < $countfiles; $index++) {
+                            $doc1 = $_FILES['files']['tmp_name'][$index];
+                            $destino = $ruta.$_FILES['files']['name'][$index];
+                            $documento->insert_documento_detalle( $output["dtick_id"],$_FILES['files']['name'][$index]);
+                            move_uploaded_file($doc1,$destino);
+                        }
+                    }
+                }
+            }
+            echo json_encode($datos);
             break;
         case "listar_x_usu":
             $datos=$ticket->listar_ticket_x_usu($_POST["usu_id"]);
@@ -225,6 +249,32 @@
 
                                 <div class="timeline-body">
                                     <?php echo $row["dtick_descrip"];?>
+                                </div>
+                                <div class="timeline-footer">
+                                    <?php 
+                                        $datos_detalle=$documento->get_documento_detalle_x_ticketd($row['dtick_id']);
+                                        if (is_array($datos_detalle)==true and count($datos_detalle)>0){
+                                    ?>
+                                    <strong>Documentos Adjuntos</strong>
+                                    <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 90%;">Nombre</th>
+                                                <th class="text-center" style="width: 10%;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php foreach($datos_detalle as $row_detalle): ?>
+                                            <tr>
+                                                <td><?php echo $row_detalle['det_nom']; ?></td>
+                                                <td><a href="../document/ticket_detalle/<?php echo $row_detalle['dtick_id']; ?>/<?php echo $row_detalle['det_nom']; ?>" target="_blank" class="btn btn-inline btn-primary btn-sm"><i class="fa fa-eye"></i> Ver</a></td>
+                                            </tr>
+                                        <?php endforeach;?>
+                                        </tbody>
+                                    </table>
+                                    <?php 
+                                        }
+                                    ?>
                                 </div>
 
                             </div>

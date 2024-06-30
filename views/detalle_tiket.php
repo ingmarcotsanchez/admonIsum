@@ -126,6 +126,14 @@ if(isset($_SESSION["usu_id"])){
                                         </textarea>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="fileElem">Documento de Soporte</label>
+                                            <input type="file" class="form-control" id="fileElem" name="fileElem" multiple>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <button type="button" id="btnEnviarTicket" class="btn btn-info float-right">Enviar</button>
