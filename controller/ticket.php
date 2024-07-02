@@ -6,6 +6,9 @@
     $usuario = new Usuario();
     require_once("../models/Documento.php");
     $documento = new Documento();
+    /* $key="mi_key_secret";
+    $cipher="aes-256-cbc";
+    $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($cipher)); */
  
     switch($_GET["opc"]){
         case "asignar":
@@ -112,6 +115,10 @@
                     }
                 }
                 $sub_array[] = '<button type="button" onClick="ver('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>';
+                /* $cifrado = openssl_encrypt($row["tick_id"],$cipher,$key,OPENSSL_RAW_DATA,$iv);
+                $textoCifrado = base64_encode($iv . $cifrado);
+                $sub_array[] = '<button type="button" data-ciphertext="'.$textoCifrado.'"  id="'.$textoCifrado.'" class="btn btn-inline btn-primary btn-sm"><i class="fa fa-eye"></i></button>';
+                 */
                 if($row["tick_estado"]=="Cerrado"){
                     $sub_array[] = '<button type="button" onClick="evaluar('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-outline-primary btn-sm ladda-button"><i class="fa fa-key"></i></button>';
                 }else{
@@ -128,7 +135,11 @@
             echo json_encode($results);
             break;
         case "mostrar";
-            $datos=$ticket->listar_ticket_x_id($_POST["tick_id"]);  
+            $datos=$ticket->listar_ticket_x_id($_POST["tick_id"]);
+            //$datos=$ticket->listar_ticket_x_id(openssl_decrypt($_POST["tick_id"],$cipher,$key,OPENSSL_RAW_DATA,$iv));
+            
+            
+            
             if(is_array($datos)==true and count($datos)>0){
                 foreach($datos as $row)
                 {
@@ -170,6 +181,7 @@
             //var_dump($datos);
             $data= Array();
             foreach($datos as $row){
+
                 $sub_array = array();
                 $sub_array[] = $row["tick_id"];
                 $sub_array[] = $row["cat_nom"];
@@ -207,8 +219,12 @@
                         $sub_array[] = '<strong class="text-info">'. $row1["usu_nom"].'</strong>';
                     }
                 }
+                //base64_encode(openssl_encrypt($row["tick_id"],$cipher,$key,OPENSSL_RAW_DATA,$iv));
                 $sub_array[] = '<button type="button" onClick="ver('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>';
-                
+                /* $cifrado = openssl_encrypt($row["tick_id"],$cipher,$key,OPENSSL_RAW_DATA,$iv);
+                $textoCifrado = base64_encode($iv . $cifrado);
+                $sub_array[] = '<button type="button" data-ciphertext="'.$textoCifrado.'"  id="'.$textoCifrado.'" class="btn btn-inline btn-primary btn-sm"><i class="fa fa-eye"></i></button>';
+                 */
                 $sub_array[] = '<button disabled type="button" onClick="evaluar('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-outline-primary btn-sm ladda-button"><i class="fa fa-key"></i></button>';
                 
                 $data[] = $sub_array;
@@ -222,7 +238,12 @@
             echo json_encode($results);
             break;
         case "listardetalle":
+            /* $iv_dec = substr(base64_decode($_POST["tick_id"]), 0, openssl_cipher_iv_length($cipher));
+            $cifradoSinIV = substr(base64_decode($_POST["tick_id"]), openssl_cipher_iv_length($cipher));
+            $decifrado = openssl_decrypt($cifradoSinIV, $cipher, $key, OPENSSL_RAW_DATA, $iv_dec); */
+
             $datos=$ticket->listar_ticketdetalle_x_ticket($_POST["tick_id"]);
+            //$datos=$ticket->listar_ticketdetalle_x_ticket($decifrado);
             ?>
                 <?php foreach($datos as $row): ?>
                     <div class="timeline" id="DtlleTicket">

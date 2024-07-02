@@ -136,6 +136,12 @@ function ver(tick_id){
     window.open('detalle_tiket.php?ID='+ tick_id +'');
 }
 
+$(document).on("click",".btn-inline",function(){
+    const ciphertext = $(this).data("ciphertext");
+    console.log(ciphertext);
+    window.open('detalle_tiket.php?ID='+ciphertext+'');
+});
+
 function evaluar(tick_id){
     console.log(tick_id);
     window.open('admEncuestas.php?ID='+ tick_id +'');

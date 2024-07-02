@@ -5,8 +5,36 @@ function init(){
 $(document).ready(function(){
 
     var tick_id = getUrlParameter('ID');
+    /* const url=window.location.href;
+    const params = new URLSearchParams(new URL(url).search);
+    const tick_id = params.get("ID");
+    const decoded_id = decodeURIComponent(tick_id);
+    const id = decoded_id.replace(/\s/g, '+'); */
 
     listardetalle(tick_id);
+    /* $.post("/ISUM/controller/ticket.php?opc=listardetalle", { tick_id : tick_id }, function (data) {
+        $('#Detalle_ticket').html(data);
+    });
+     
+
+    $.post("/ISUM/controller/ticket.php?opc=mostrar", { tick_id : tick_id }, function (data) {
+        data = JSON.parse(data);
+        //console.log(data);
+        $('#id_ticket').html(data.tick_id);
+        $('#Estado').html(data.tick_estado);
+        $('#Fecha_creacion').html(data.fech_crea);
+
+        $('#cat_nom').val(data.cat_nom);
+        $('#cats_nom').val(data.cats_nom);
+        $('#prio_nom').val(data.prio_nom);
+        $('#tick_titulo').val(data.tick_titulo);
+        $('#tick_descrip_usu').summernote ('code',data.tick_descrip);
+
+        if (data.tick_estado_texto == "Cerrado"){
+            $('#panel_detalle').hide();
+        }
+    });  */
+
 
     $('#dtick_descrip').summernote({
         height: 300,
@@ -219,6 +247,7 @@ function listardetalle(tick_id){
             $('#panel_detalle').hide();
         }
     }); 
+
 }
 
 init();
