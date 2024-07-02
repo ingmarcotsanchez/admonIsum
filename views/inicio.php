@@ -209,6 +209,7 @@ if(isset($_SESSION["usu_id"])){
 ?>
 <script type="text/javascript" src="js/inicio.js"></script>
 <script type="text/javascript" src="js/inicio/barras.js"></script>
+<script type="text/javascript" src="notificacion.js"></script>
 
 
   

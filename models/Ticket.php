@@ -32,12 +32,28 @@
             $sql->bindValue(2, $usu_id);
             $sql->bindValue(3, $dtick_descrip);
             $sql->execute();
-
             $sql1="SELECT last_insert_id() AS 'dtick_id';";
             $sql1=$conectar->prepare($sql1);
             $sql1->execute();
             return $resultado=$sql1->fetchAll(pdo::FETCH_ASSOC);
             //return $resultado=$sql->fetchAll();
+            $ticket = new Ticket();
+                $datos = $ticket->listar_ticket_x_id($tick_id);
+                foreach ($datos as $row){
+                    $usu_asig = $row["usu_asig"];
+                    $usu_crea = $row["usu_id"];
+                }
+            if($_SESSION["usu_rol"]=="E"){
+                
+                
+                $sql2="INSERT INTO notificaciones (not_id,usu_id,not_mensaje,tick_id,est) VALUES (null,$usu_asig,'Tiene una respuesta del ticket Nro : ',$tick_id,2)";
+                $sql2=$conectar->prepare($sql2);
+                $sql2->execute(); 
+            }else{
+                $sql2="INSERT INTO notificaciones (not_id,usu_id,not_mensaje,tick_id,est) VALUES (null,$usu_crea,'Tiene una respuesta del ticket Nro : ',$tick_id,2)";
+                $sql2=$conectar->prepare($sql2);
+                $sql2->execute(); 
+            }
         }
 
         public function insert_ticketdetalle_cerrar($tick_id,$usu_id){
@@ -126,11 +142,11 @@
             $sql->bindValue(2, $tick_id);
             $sql->execute();
 
-            /* $sql1="INSERT INTO tm_notificacion (not_id,usu_id,not_mensaje,tick_id,est) VALUES (null,?,'Se le ha asignado el ticket Nro : ',?,2)";
+            $sql1="INSERT INTO notificaciones (not_id,usu_id,not_mensaje,tick_id,est) VALUES (null,?,'Se le ha asignado el ticket Nro : ',?,2)";
             $sql1=$conectar->prepare($sql1);
             $sql1->bindValue(1, $usu_asig);
             $sql1->bindValue(2, $tick_id);
-            $sql1->execute(); */
+            $sql1->execute(); 
 
             return $resultado=$sql->fetchAll();
         }
@@ -240,6 +256,7 @@
                 ticket.fech_cierre,
                 ticket.tick_estre,
                 ticket.tick_coment,
+                ticket.usu_asig,
                 usuario.usu_nom,
                 usuario.usu_apep,
                 usuario.usu_apem,
@@ -324,20 +341,6 @@
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
-
-        /* TODO: Filtro Avanzado de ticket */
-        /* public function filtrar_ticket($tick_titulo,$cat_id,$prio_id){
-            $conectar= parent::conexion();
-            parent::set_names();
-            $sql="call filtrar_ticket (?,?,?)";
-            $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, "%".$tick_titulo."%");
-            $sql->bindValue(2, $cat_id);
-            $sql->bindValue(3, $prio_id);
-            $sql->execute();
-            return $resultado=$sql->fetchAll();
-
-        }*/
         
     }
 ?>

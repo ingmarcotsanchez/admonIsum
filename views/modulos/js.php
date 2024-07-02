@@ -20,7 +20,9 @@
 <!-- sweetalert -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Summernote -->
-<script src="/ISUM/html//plugins/summernote/summernote-bs4.min.js"></script>
+<script src="/ISUM/html/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- Notify -->
+<script src="/ISUM/html/public/lib/bootstrap-notify/bootstrap-notify.min.js"></script>
 
 <!-- AdminLTE App -->
 <script src="../html/dist/js/adminlte.min.js"></script>
